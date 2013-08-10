@@ -48,4 +48,5 @@ end
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+#ssl
 gem 'certified' 

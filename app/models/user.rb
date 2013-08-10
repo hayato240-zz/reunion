@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     create!do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
+      user.image = auth["info"]["image"]
 
       if user.provider == "facebook"
          user.name = auth["info"]["name"]

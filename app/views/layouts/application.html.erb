@@ -9,9 +9,10 @@
 <body>
   <div id="user_nav">
     <% if current_user %>
-       <%= current_user.name %>さんで、ログイン中　<%= link_to "ログアウト" ,logout_path %>
+    	<%= image_tag current_user.image %>
+	    <%= current_user.name %>さんで、ログイン中　<%= link_to "ログアウト" ,logout_path %>
     <% else %>
-       <%= link_to "facebookでlogin", "/auth/facebook" %>
+    	<%= link_to "facebookでlogin", "/auth/facebook" %>
     <% end %>
 </div>
 
