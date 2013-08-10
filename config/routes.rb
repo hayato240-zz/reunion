@@ -1,4 +1,9 @@
 CNE1Party::Application.routes.draw do
+  resources :events
+  root :to => 'events#index'
+
+  get '/auth/:provider/callback', to: 'sessions#callback'
+  get '/logout' => 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
