@@ -1,0 +1,25 @@
+<%= form_for @user, url: update_profile_setting_index_path do |f| %>
+	<% if @user.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this user from being saved:</h2>
+	      <ul>
+		    <% @user.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		    <% end %>
+	      </ul>
+	    </div>
+	<% end %>
+
+	<div class="field">
+    	<%= f.label :study_from %><br>
+	    <%= f.date_select :study_from %>
+	</div>
+	<div class="field">
+    	<%= f.label :study_to %><br>
+	    <%= f.date_select :study_to %>
+	</div>
+
+	<div class="actions">
+	    <%= f.submit %>
+	</div>
+<% end %>

@@ -1,5 +1,12 @@
 CNE1Party::Application.routes.draw do
+  get "login/index"
   resources :events
+  resources :setting, only: [:index] do
+    collection do
+      get 'edit'
+      patch 'update_profile'
+    end
+  end
   root :to => 'events#index'
 
   get '/auth/:provider/callback', to: 'sessions#callback'

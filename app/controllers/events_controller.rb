@@ -1,6 +1,12 @@
 class EventsController < ApplicationController
+  before_filter :authenticate
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
+  # login check
+  def authenticate
+    puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    redirect_to login_index_path unless current_user
+  end
   # GET /events
   # GET /events.json
   def index
