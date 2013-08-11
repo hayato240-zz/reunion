@@ -7,12 +7,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="user_nav">
-    <% if current_user %>
-    	<%= image_tag current_user.image %>
-	    <%= current_user.name %>さんで、ログイン中　<%= link_to "ログアウト" ,logout_path %>
-    <% end %>
-</div>
+
+ <%# if user_signed_in? %>
+    <div class="container-fluid">
+      <div id="header">
+        <div class="navbar navbar-primary">
+          <div class="navbar-inner">
+            <a class="brand">フィリピン留学</a>
+            <ul class="nav">
+              <li><%= link_to "イベント" , root_path %></li>
+              <li><%= link_to "設定", root_path %></li>
+            </ul>
+           <div align="right">
+             <% if current_user %>
+               <%= image_tag current_user.image %>
+               <%= current_user.name %>さんで、ログイン中　<%= link_to "ログアウト" ,logout_path %>
+             <% else %>  
+               <%= link_to "facebookでlogin", "/auth/facebook" %>
+             <% end %>             
+           </div>
+
+          </div>
+        </div>
+      </div>
 
 
 <%= yield %>

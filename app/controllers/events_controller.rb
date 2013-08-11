@@ -4,7 +4,6 @@ class EventsController < ApplicationController
 
   # login check
   def authenticate
-    puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     redirect_to login_index_path unless current_user
   end
   # GET /events

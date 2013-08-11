@@ -1,15 +1,16 @@
-<h1>Listing events</h1>
-
+<center>
+<h1>イベントリスト</h1>
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Place</th>
-      <th>Price</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>イベント名</th>
+      <th>日付</th>
+      <th>場所</th>
+      <th>金額</th>
+      <th>詳細</th>
+      <th>編集</th>
+      <th>削除</th>
+
     </tr>
   </thead>
 
@@ -20,14 +21,14 @@
         <td><%= event.date %></td>
         <td><%= event.place %></td>
         <td><%= event.price %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '詳細', event %></td>
+        <td><%= link_to '編集', edit_event_path(event) %></td>
+        <td><%= link_to '削除', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
 
-<%= link_to 'New Event', new_event_path %>
+<%= link_to 'イベントの新規作成', new_event_path %>
+</center>

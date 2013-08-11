@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 class SessionsController < ApplicationController
+
   def callback
     auth = request.env["omniauth.auth"]
     user = User.find_by_provider_and_uid(auth["provider"],auth["uid"])

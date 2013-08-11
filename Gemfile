@@ -50,3 +50,11 @@ gem 'omniauth-facebook'
 
 #ssl
 gem 'certified' 
+
+#railsテンプレート
+gem 'less-rails'
+gem 'less-rails-bootstrap'
+
+group :assets do
+  gem 'therubyracer'
+end
