@@ -17,9 +17,9 @@
 	<strong>留学情報</strong>
 <% @user.study_abroads.each do |study_abroad| %>
 <p>
-	<strong>学校名</strong>
+	<strong>学校名:</strong>
 	<%= study_abroad.school_name %>
-	<strong>期間</strong>
+	<strong>期間:</strong>
 	<%= study_abroad.study_from.to_s + " ~ " + study_abroad.study_to.to_s %>
 </p>	
 <% end %>

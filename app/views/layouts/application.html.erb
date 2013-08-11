@@ -16,17 +16,15 @@
             <a class="brand">フィリピン留学</a>
             <ul class="nav">
               <li><%= link_to "イベント" , root_path %></li>
-
-              <li>
-                <%= link_to "プロフィール", profile_index_path %></li>
-              </li>
+              <li><%= link_to "プロフィール", profile_index_path %></li>
+              <li><%= link_to "設定"%>
             </ul>
            <div align="right">
              <% if current_user %>
                <%= image_tag current_user.image %>
                <%= current_user.name %>さんで、ログイン中　<%= link_to "ログアウト" ,logout_path %>
              <% else %>  
-               <%= link_to "facebookでlogin", "/auth/facebook" %>
+               <%= link_to "facebookでlogin", "/auth/facebook", :class => 'btn btn-primary' %>
              <% end %>             
            </div>
 

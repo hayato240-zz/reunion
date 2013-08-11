@@ -1,34 +1,102 @@
 <center>
-<h1>イベントリスト</h1>
-<table>
-  <thead>
-    <tr>
-      <th>イベント名</th>
-      <th>日付</th>
-      <th>場所</th>
-      <th>金額</th>
-      <th>詳細</th>
-      <th>編集</th>
-      <th>削除</th>
+  <h1>イベントリスト</h1>
+  <%#= link_to 'イベントの新規作成', new_event_path, remote: true,id: 'add_event_button',:class => 'btn btn-primary'  %>
+  <%= link_to 'イベントの新規作成', new_event_path, :class => 'btn btn-primary'  %>
 
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.name %></td>
-        <td><%= event.date %></td>
-        <td><%= event.place %></td>
-        <td><%= event.price %></td>
-        <td><%= link_to '詳細', event %></td>
-        <td><%= link_to '編集', edit_event_path(event) %></td>
-        <td><%= link_to '削除', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
 
-<%= link_to 'イベントの新規作成', new_event_path %>
+  <br/>
+  <br>
+
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="my_group">
+      <table class="table table-hover" align="center">
+	<thead>
+	  <tr>
+	    <th>イベント名</th>
+	    <th>日付</th>
+	    <th>場所</th>
+	    <th>金額</th>
+	    <th>詳細</th>
+	    <th>編集</th>
+	    <th>削除</th>
+
+	  </tr>
+	</thead>
+
+	<tbody>
+	  <% @events.each do |event| %>
+	  <tr>
+            <td><%= event.name %></td>
+            <td><%= event.date %></td>
+            <td><%= event.place %></td>
+            <td><%= event.price %></td>
+            <td><%= link_to '詳細', event %></td>
+            <td><%= link_to '編集', edit_event_path(event) %></td>
+            <td><%= link_to '削除', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+	  <% end %>
+	</tbody>
+      </table>
+      <br> 
+    </div>
+  </div>
 </center>
+
+<div class="modal hide fade" id="add_event_modal">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body" id="create_body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-large" id="save_select_modal_button">保存</button>
+    <button class="btn btn-large" id="close_select_modal_button">戻る</button>
+  </div>
+</div>
+</div>
+
+
+<%= javascript_include_tag '/javascripts/messages.js' %>
+
+<%= javascript_tag do %>
+
+<%#「イベント作成」ボタン %>
+$('#add_event_button').click(function(event)
+{
+$('#add_event_modal').modal('show');
+});
+
+<%# モーダル内の「戻る」ボタン %>
+$('#close_select_modal_button').click(function(){
+  $('#add_event_modal').modal('hide');
+});
+
+<%# モーダル内の「保存」ボタン %>
+$(document).on('click', '#save_select_modal_button', function(data, status, xhr){
+
+  $('#add_event_modal').modal('hide');
+  send_member('/members/add_member', memberText);
+});
+
+$(document).on('ajax:success', '#add_event_button', function(data, status, xhr){
+  $("#create_body").html(status);
+});
+
+
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
