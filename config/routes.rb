@@ -1,4 +1,9 @@
 CNE1Party::Application.routes.draw do
+  get "profile/index"
+  get "profile/edit"
+  get "profile/create"
+  get "profile/update"
+  get "profile/destroy"
   get "login/index"
   resources :events
   resources :setting, only: [:index] do

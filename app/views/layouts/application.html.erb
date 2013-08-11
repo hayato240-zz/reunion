@@ -16,7 +16,10 @@
             <a class="brand">フィリピン留学</a>
             <ul class="nav">
               <li><%= link_to "イベント" , root_path %></li>
-              <li><%= link_to "プロフィール編集", edit_setting_index_path %></li>
+
+              <li>
+                <%= link_to "プロフィール", profile_index_path %></li>
+              </li>
             </ul>
            <div align="right">
              <% if current_user %>

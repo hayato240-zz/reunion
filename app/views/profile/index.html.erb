@@ -1,0 +1,27 @@
+
+<center>
+<h1>プロフィール</h1>
+
+<p>
+  <strong>名前:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>画像:</strong>
+  <%= image_tag @user.image %>
+</p>
+<p>
+
+<p>
+	<strong>留学情報</strong>
+<% @user.study_abroads.each do |study_abroad| %>
+<p>
+	<strong>学校名</strong>
+	<%= study_abroad.school_name %>
+	<strong>期間</strong>
+	<%= study_abroad.study_from.to_s + " ~ " + study_abroad.study_to.to_s %>
+</p>	
+<% end %>
+</p>
+</center>
