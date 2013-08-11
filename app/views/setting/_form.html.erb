@@ -11,15 +11,17 @@
 	<% end %>
 
 	<div class="field">
-    	<%= f.label :study_from %><br>
+    	<%= f.label "留学開始日"%>
 	    <%= f.date_select :study_from %>
 	</div>
+	<br>
 	<div class="field">
-    	<%= f.label :study_to %><br>
+    	<%= f.label "留学終了日" %>
 	    <%= f.date_select :study_to %>
 	</div>
 
 	<div class="actions">
-	    <%= f.submit %>
+
+	    <%= f.submit "プロフィール更新", class: "btn"%>
 	</div>
 <% end %>
