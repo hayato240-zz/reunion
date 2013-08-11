@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  school_name: MyString
+  study_from: 2013-08-11
+  study_to: 2013-08-11
+
+two:
+  school_name: MyString
+  study_from: 2013-08-11
+  study_to: 2013-08-11
