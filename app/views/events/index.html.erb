@@ -1,7 +1,7 @@
 <center>
   <h1>イベントリスト</h1>
-  <%#= link_to 'イベントの新規作成', new_event_path, remote: true,id: 'add_event_button',:class => 'btn btn-primary'  %>
-  <%= link_to 'イベントの新規作成', new_event_path, :class => 'btn btn-primary'  %>
+  <%= link_to 'イベントの新規作成', new_event_path, remote: true,id: 'add_event_button',:class => 'btn btn-primary'  %>
+
 
 
 
@@ -74,11 +74,13 @@ $('#close_select_modal_button').click(function(){
 });
 
 <%# モーダル内の「保存」ボタン %>
-$(document).on('click', '#save_select_modal_button', function(data, status, xhr){
 
-  $('#add_event_modal').modal('hide');
-  send_member('/members/add_member', memberText);
-});
+
+$(document).on('click', '#save_select_modal_button', function(e){
+    e.preventDefault();
+
+    $('#event_form').submit();
+  });
 
 $(document).on('ajax:success', '#add_event_button', function(data, status, xhr){
   $("#create_body").html(status);
