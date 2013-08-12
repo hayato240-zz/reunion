@@ -1,24 +1,26 @@
+<center>
 <p id="notice"><%= notice %></p>
-
+<h2>イベント詳細</h2>
 <p>
-  <strong>Name:</strong>
+  <strong>名前:</strong>
   <%= @event.name %>
 </p>
 
 <p>
-  <strong>Date:</strong>
+  <strong>日付:</strong>
   <%= @event.date %>
 </p>
 
 <p>
-  <strong>Place:</strong>
+  <strong>場所:</strong>
   <%= @event.place %>
 </p>
 
 <p>
-  <strong>Price:</strong>
+  <strong>料金:</strong>
   <%= @event.price %>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
+</center>
