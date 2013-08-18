@@ -20,27 +20,27 @@
       </tr>
       <tr>
         <td><%= "名前"%></td>
-        <td><%= f.text_field :name%></td>
+        <td colspan="2"><%= f.text_field :name%></td>
       </tr>
       <tr>
         <td><%= "日付"%></td>
-        <td><%= f.date_select :date%></td>
+        <td colspan="2"><%= f.date_select :date%></td>
       </tr>
       <tr>
         <td> <%= f.label "都道府県" %></td>
-        <td><%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %></td>
+        <td colspan="2"><%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %></td>
       </tr>
       <tr>
         <td><%= "場所"%></td> 
-        <td><%= f.text_field :place%></td>
+        <td colspan="2"><%= f.text_field :place%></td>
       </tr>
       <tr>
         <td><%= "料金"%></td>
-        <td><%= f.number_field :price%></td>
+        <td colspan="2"><%= f.number_field :price%></td>
       </tr>
       <tr>
         <td><%= "詳細" %></td>
-        <td><%= f.text_area :detail %></td>
+        <td colspan="2"><%= f.text_area :detail %></td>
       </tr>
     </tbody>
   </table>

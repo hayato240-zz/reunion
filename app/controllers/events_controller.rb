@@ -39,7 +39,6 @@ class EventsController < ApplicationController
 
     @event.admin_user = current_user.id
 
-    puts "ssssssssssssssssssssss",params[:prefecture_id]
     respond_to do |format|
       if @event.save
         format.html { redirect_to events_path, notice: 'イベントを作成しました' }

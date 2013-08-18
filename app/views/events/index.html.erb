@@ -79,12 +79,13 @@
     <a class="close" data-dismiss="modal">×</a>
     <h3>イベントの更新</h3>
   </div>
-  <div class="update-modal-body" id="update_body">
+  <div class="update-modal-body" id="update_body"  style="height:500px; width:560px; overflow-x:scroll;">
     <p>One fine body…</p>
   </div>
   <div class="modal-footer">
     <button class="btn btn-large" id="update_select_modal_button">保存</button>
-    <button class="btn btn-large" id="update_select_close_modal_button">戻る</button>  </div>
+    <button class="btn btn-large" id="update_select_close_modal_button">戻る</button>  
+  </div>
 </div>
 
 <%= javascript_tag do %>
@@ -126,6 +127,7 @@ $('#update_select_close_modal_button').click(function(){
 $(document).on('click', '#update_select_modal_button', function(e){
     e.preventDefault();
 
+    $('#update_event_modal').modal('hide');
     $('#event_form').submit();
 });
 
