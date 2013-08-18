@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+# coding: utf-8
 StudyAbroad.delete_all
 Teacher.delete_all
 
@@ -20,6 +20,8 @@ Teacher.create(:name => 'Via', :study_abroads_id => 1)
 Teacher.create(:name => 'Apple', :study_abroads_id => 2)
 Teacher.create(:name => 'Garry', :study_abroads_id => 2)
 
-
-
-User
+Prefecture.create(:name => '北海道')
+Prefecture.create(:name => '青森')
+Prefecture.create(:name => '秋田')
+Prefecture.create(:name => '岩手')
+Prefecture.create(:name => '宮城')

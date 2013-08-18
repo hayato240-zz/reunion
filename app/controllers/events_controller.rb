@@ -36,9 +36,10 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+
     @event.admin_user = current_user.id
-  debugger
-  puts "ssssssssssssssssssssss",current_user.id
+
+    puts "ssssssssssssssssssssss",params[:prefecture_id]
     respond_to do |format|
       if @event.save
         format.html { redirect_to events_path, notice: 'イベントを作成しました' }
@@ -84,7 +85,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:image,:name, :date, :place, :price, :detail)
+      params.require(:event).permit(:image,:name, :date, :place, :price, :detail, :prefecture_id)
     end
 
     #イベントの作成者以外は、編集削除が出来ないようにする

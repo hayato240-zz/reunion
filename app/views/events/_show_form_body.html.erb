@@ -27,6 +27,10 @@
 				<td><%= @event.date%></td>
 			</tr>
 			<tr>
+				<td><%= "都道府県" %></td>
+				<td><%= Prefecture.find(@event.prefecture_id).name%>
+			</tr>
+			<tr>
 				<td><%= "場所"%></td>
 				<td><%= @event.place%></td>
 			</tr>

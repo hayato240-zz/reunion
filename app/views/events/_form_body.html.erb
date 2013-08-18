@@ -27,7 +27,11 @@
         <td><%= f.date_select :date%></td>
       </tr>
       <tr>
-        <td><%= "場所"%></td>
+        <td> <%= f.label "都道府県" %></td>
+        <td><%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %></td>
+      </tr>
+      <tr>
+        <td><%= "場所"%></td> 
         <td><%= f.text_field :place%></td>
       </tr>
       <tr>
