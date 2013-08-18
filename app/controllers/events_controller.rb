@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    render :partial => 'form_body'
+    render :partial => 'show_form_body'
   end
 
   # GET /events/new

@@ -11,29 +11,32 @@
     </div>
   <% end %>
 
-   <div class="tab-content">
+ <div class="tab-content">
     <div class="tab-pane active" id="my_group">
       <table class="table table-hover" align="center">
-    <tbody>
-      <tr>
-        <td><%= "名前"%></td>
-        <td><%= f.text_field :name%></td>
-      </tr>
-      <tr>
-        <td><%= "日付"%></td>
-        <td><%= f.date_select :date%></td>
-      </tr>
-      <tr>
-        <td><%= "場所"%></td>
-        <td><%= f.text_field :place%></td>
-      </tr>
-      <tr>
-        <td><%= "料金"%></td>
-        <td><%= f.number_field :price%></td>
-      </tr>
-    </tbody>
+		<tbody>
+			<tr>
+				<td><%= "名前"%></td>
+				<td><%= @event.name%></td>
+			</tr>
+			<tr>
+				<td><%= "日付"%></td>
+				<td><%= @event.date%></td>
+			</tr>
+			<tr>
+				<td><%= "場所"%></td>
+				<td><%= @event.place%></td>
+			</tr>
+			<tr>
+				<td><%= "料金"%></td>
+				<td><%= @event.price%></td>
+			</tr>
+		</tbody>
       </table>
 
     </div>
 </div>
-<% end %>
+<% end %>	
+
+
+
