@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_filter :authenticate
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :create, :update, :destory]
 
   # login check
   def authenticate
@@ -9,7 +10,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    require 'date'
+    #.order(:date).
+    @events = Event.all.where('date >= ?', Date.today).order(:date)
   end
 
   # GET /events/1
@@ -33,7 +36,9 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.admin_user = current_user.id
+  debugger
+  puts "ssssssssssssssssssssss",current_user.id
     respond_to do |format|
       if @event.save
         format.html { redirect_to events_path, notice: 'イベントを作成しました' }
@@ -79,6 +84,13 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:image,:name, :date, :place, :price)
+      params.require(:event).permit(:image,:name, :date, :place, :price, :detail)
+    end
+
+    #イベントの作成者以外は、編集削除が出来ないようにする
+    def check_user
+      if Event.find(params[:id]).admin_user != current_user.id
+        redirect_to root_path
+      end
     end
 end
