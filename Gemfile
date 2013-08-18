@@ -58,3 +58,9 @@ gem 'less-rails-bootstrap'
 group :assets do
   gem 'therubyracer'
 end
+
+#paperclip
+gem "paperclip", "~> 3.0"
+
+#attr_accessible
+gem 'protected_attributes'

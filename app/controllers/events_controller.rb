@@ -36,10 +36,10 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to events_path, notice: 'Event was successfully created.' }
+        format.html { redirect_to events_path, notice: 'イベントを作成しました' }
         format.json { render action: 'index', status: :created}
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', notice: 'イベントに失敗しました' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -50,10 +50,12 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+#        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        debugger
+        format.html {redirect_to events_path, notice: 'イベントの更新に成功しました'}
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'edit', notice: 'イベントの更新に失敗しました' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -77,6 +79,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :date, :place, :price)
+      params.require(:event).permit(:image,:name, :date, :place, :price)
     end
 end
