@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130818135859) do
+ActiveRecord::Schema.define(version: 20130818150243) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20130818135859) do
     t.integer  "admin_user"
     t.string   "detail"
     t.integer  "prefecture_id"
+    t.boolean  "is_public"
   end
 
   create_table "prefectures", force: true do |t|
