@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_filter :authenticate
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :check_user, only: [:edit, :create, :update, :destory]
+  before_action :check_user, only: [:edit, :update, :destory]
 
   # login check
   def authenticate

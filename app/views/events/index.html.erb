@@ -32,7 +32,7 @@
             <td><%= link_to '詳細', event, remote: true, id:'show_event_button' %></td>
             <% if(current_user.id == event.admin_user)%>            
               <td><%= link_to '編集', edit_event_path(event), remote: true, id: 'edit_event_path' %></td>
-              <td><%= link_to '削除', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to '削除', event, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
             <% end %>
 	  </tr>
 	  <% end %>
