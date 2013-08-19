@@ -19,7 +19,8 @@ $(function(){
 	    <th>イベント名</th>
       <th>管理者</th>
 	    <th>日付</th>
-	    <th>場所</th>
+      <th>開催地</th>
+	    <th>会場</th>
 	    <th>金額</th>
 	    <th>詳細</th>
 	    <th>編集</th>
@@ -34,6 +35,7 @@ $(function(){
             <td><%= event.name %></td>
             <td><%= User.find(event.admin_user).name %></td>
             <td><%= event.date %></td>
+            <td><%= Prefecture.find(event.prefecture_id).name %></td>
             <td><%= event.place %></td>
             <td><%= event.price %></td>
             <td><%= link_to '詳細', event, remote: true, id:'show_event_button' %></td>
