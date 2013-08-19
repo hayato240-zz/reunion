@@ -3,8 +3,13 @@
   <%= link_to 'イベントの新規作成', new_event_path, remote: true,id: 'add_event_button',:class => 'btn btn-primary'  %>
   <br/>
   <br>
+<input type="text" id="datepicker">
+<script type="text/javascript">
+$(function(){
+　$("#datepicker").datepicker();
 
-
+});
+</script>
   <div class="tab-content">
     <div class="tab-pane active" id="my_group">
       <table class="table table-hover" align="center">
@@ -12,6 +17,7 @@
 	  <tr>
       <th>イベント画像</th>
 	    <th>イベント名</th>
+      <th>管理者</th>
 	    <th>日付</th>
 	    <th>場所</th>
 	    <th>金額</th>
@@ -26,6 +32,7 @@
 	  <tr>
             <td><%=  image_tag event.image.url(:thumb) %></td>
             <td><%= event.name %></td>
+            <td><%= User.find(event.admin_user).name %></td>
             <td><%= event.date %></td>
             <td><%= event.place %></td>
             <td><%= event.price %></td>

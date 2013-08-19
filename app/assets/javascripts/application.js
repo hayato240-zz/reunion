@@ -14,8 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require jquery.ui.all
+//= require jquery.ui.datepicker-ja
 
 //= require twitter/bootstrap
 $(document).ready(function(){
-
+	$( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
 });
