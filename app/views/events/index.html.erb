@@ -40,7 +40,11 @@ $(function(){
             <% if(current_user.id == event.admin_user)%>            
               <td><%= link_to '編集', edit_event_path(event), remote: true, id: 'edit_event_path' %></td>
               <td><%= link_to '削除', event, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+            <% else %>
+              <td></td>
+              <td></td>
             <% end %>
+
 	  </tr>
 	  <% end %>
 	</tbody>
