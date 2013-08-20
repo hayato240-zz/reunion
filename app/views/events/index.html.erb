@@ -56,48 +56,18 @@ $(function(){
   </div>
 </center>
 
-<!-- イベント作成用モーダル -->
-<div class="modal hide fade" id="add_event_modal">
+<div class="modal hide fade" id="event_modal">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3>イベント作成</h3>
   </div>
-  <div class="modal-body" id="create_body">
-    <p>One fine body…</p>
+
+  <div class="modal-body" id="event_body">
   </div>
+
   <div class="modal-footer">
     <button class="btn btn-large" id="save_select_modal_button">保存</button>
     <button class="btn btn-large" id="close_select_modal_button">戻る</button>
-  </div>
-</div>
-
-<!-- イベント詳細用モーダル -->
-<div class="modal hide fade" id="show_event_modal">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>イベントの詳細</h3>
-  </div>
-  <div class="show-modal-body" id="show_body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-large" id="show_select_close_modal_button">閉じる</button>
-  </div>
-</div>
-
-
-<!-- イベント更新用モーダル -->
-<div class="modal hide fade" id="update_event_modal">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>イベントの更新</h3>
-  </div>
-  <div class="update-modal-body" id="update_body"  style="height:500px; width:560px; overflow-x:scroll;">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-large" id="update_select_modal_button">保存</button>
-    <button class="btn btn-large" id="update_select_close_modal_button">戻る</button>  
   </div>
 </div>
 
@@ -105,21 +75,21 @@ $(function(){
 
 <%# 「イベント作成」のモーダルを表示 %>
 $(document).on('ajax:success', '#add_event_button', function(data, status, xhr){
-  $("#create_body").html(status);
-  $("#add_event_modal").modal("show");
+  $("#event_body").html(status);
+  $("#event_modal").modal("show");
 });
 
 
 <%# 「イベント作成」モーダル内の「戻る」ボタン %>
 $('#close_select_modal_button').click(function(){
-  $('#add_event_modal').modal('hide');
+  $('#event_modal').modal('hide');
 });
 
 <%# 「イベント作成」モーダル内の「保存」ボタン %>
 $(document).on('click', '#save_select_modal_button', function(e){
     e.preventDefault();
 
-    $('#add_event_modal').modal('hide');
+    $('#event_modal').modal('hide');
     $('#event_form').submit();
 
   });
@@ -127,33 +97,33 @@ $(document).on('click', '#save_select_modal_button', function(e){
 
 <%# イベント編集をモーダル表示 %>
 $(document).on('ajax:success', '#edit_event_path', function(data, status, xhr){
-  $("#update_body").html(status);
-  $("#update_event_modal").modal("show");
+  $("#event_body").html(status);
+  $("#event_modal").modal("show");
 });
 
 <%# イベント編集用モーダル内の「閉じる」ボタン %>
 $('#update_select_close_modal_button').click(function(){
-  $('#update_event_modal').modal('hide');
+  $('#event_modal').modal('hide');
 });
 
 <%# イベント編集用モーダル内の「保存」ボタン %>
 $(document).on('click', '#update_select_modal_button', function(e){
     e.preventDefault();
 
-    $('#update_event_modal').modal('hide');
+    $('#event_modal').modal('hide');
     $('#event_form').submit();
 });
 
 
 <%# イベント詳細をモーダル表示 %>
 $(document).on('ajax:success', '#show_event_button', function(data, status, xhr){
-  $("#show_body").html(status);
-  $("#show_event_modal").modal("show");
+  $("#event_body").html(status);
+  $("#event_modal").modal("show");
 });
 
 <%# プロフィール詳細用モーダル内の「閉じる」ボタン %>
 $('#show_select_close_modal_button').click(function(){
-  $('#show_event_modal').modal('hide');
+  $('#event_modal').modal('hide');
 });
 
 
