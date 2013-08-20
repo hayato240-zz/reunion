@@ -1,18 +1,8 @@
 <center>
   <h1>イベントリスト</h1>
-
-  <input id="find" name="find" type="search"/>
-
-
   <%= link_to 'イベントの新規作成', new_event_path, remote: true,id: 'add_event_button',:class => 'btn btn-primary'  %>
   <br/>
   <br>
-<input type="text" id="datepicker">
-<script type="text/javascript">
-$(function(){
-　$("#datepicker").datepicker();
-
-});
 </script>
   <div class="tab-content">
     <div class="tab-pane active" id="my_group">

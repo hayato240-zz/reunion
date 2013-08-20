@@ -24,7 +24,7 @@
       </tr>
       <tr>
         <td><%= "日付"%></td>
-        <td colspan="2"><%= f.text_field :date,:type=>'date' %> </td>       
+        <td colspan="2"><%= f.text_field :date,:type=>'date',:value=>Date.today %> </td>       
       </tr>
       <tr>
         <td> <%= f.label "都道府県" %></td>
