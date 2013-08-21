@@ -41,10 +41,10 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to events_path, notice: 'イベントを作成しました' }
+        format.html { render :partial => 'show_form_body', notice: 'イベントを作成しました' }
         format.json { render action: 'index', status: :created}
       else
-        format.html { render action: 'new', notice: 'イベントに失敗しました' }
+        format.html { render :partial => 'form_body', notice: 'イベントに失敗しました' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -56,11 +56,10 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update(event_params)
 #        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        debugger
-        format.html {redirect_to events_path, notice: 'イベントの更新に成功しました'}
+        format.html { render :partial => 'show_form_body', notice: 'イベントの更新に成功しました'}
         format.json { head :no_content }
       else
-        format.html { render action: 'edit', notice: 'イベントの更新に失敗しました' }
+        format.html { ender :partial => 'form_body', notice: 'イベントの更新に失敗しました' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end

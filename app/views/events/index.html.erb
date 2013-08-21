@@ -67,12 +67,16 @@
 
 <%= javascript_tag do %>
 
+
+$(document).on('ajax:success', '#event_body', function(data, status, xhr){
+  $("#event_body").html(status);
+});
+
 <%# 「イベント作成」のモーダルを表示 %>
 $(document).on('ajax:success', '#add_event_button', function(data, status, xhr){
   $("#event_body").html(status);
   $("#event_modal").modal("show");
 });
-
 
 <%# 「イベント作成」モーダル内の「戻る」ボタン %>
 $('#close_select_modal_button').click(function(){
@@ -82,10 +86,7 @@ $('#close_select_modal_button').click(function(){
 <%# 「イベント作成」モーダル内の「保存」ボタン %>
 $(document).on('click', '#save_select_modal_button', function(e){
     e.preventDefault();
-
-    $('#event_modal').modal('hide');
     $('#event_form').submit();
-
   });
 
 
