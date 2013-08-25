@@ -11,23 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130818150243) do
+ActiveRecord::Schema.define(version: 20130825093732) do
 
   create_table "events", force: true do |t|
     t.string   "name"
-    t.date     "date"
-    t.string   "place"
-    t.integer  "price"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.integer  "admin_user"
-    t.string   "detail"
-    t.integer  "prefecture_id"
+    t.string   "place"
+    t.integer  "price"
     t.boolean  "is_public"
+    t.integer  "prefecture_id"
+    t.string   "detail"
+    t.integer  "admin_user"
   end
 
   create_table "prefectures", force: true do |t|
