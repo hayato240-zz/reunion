@@ -19,6 +19,11 @@
         <td colspan="2"><%= f.text_field :name%></td>
       </tr>
       <tr>
+        <td width="20"><%= "イベント画像" %></td>
+        <td><%= image_tag @event.image.url(:thumb)%></td>
+        <td><%= f.file_field :image %></td>
+      </tr>
+      <tr>
         <td><%= "日付"%></td>
         <td colspan="2"><%= f.text_field :start_at,:type=>'date',:value=>Date.today %> から <%= f.text_field :end_at,:type=>'date',:value=>Date.today %></td>       
       </tr>

@@ -12,7 +12,7 @@
       <th>イベント画像</th>
 	    <th>イベント名</th>
       <th>管理者</th>
-	    <th>日付</th>
+	    <th>日時</th>
       <th>開催地</th>
 	    <th>会場</th>
 	    <th>金額</th>
@@ -25,9 +25,10 @@
 	<tbody>
 	  <% @events.each do |event| %>
 	  <tr>
-
+            <td><%= image_tag event.image(:thumb) %></td>
             <td><%= event.name %></td>
             <td><%= User.find(event.admin_user).name %></td>
+            <td><%= "#{event.start_at} から #{event.end_at}"%></td>
 
             <td><%= Prefecture.find(event.prefecture_id).name %></td>
             <td><%= event.place %></td>
