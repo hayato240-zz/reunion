@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_filter :authenticate
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destory]
-  skip_before_filter :verify_authenticity_token ,:only=>[:create]
+  skip_before_filter :verify_authenticity_token ,:only=>[:create,:edit]
 
   # login check
   def authenticate
@@ -19,7 +19,10 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    render :partial => 'show_form_body'
+    respond_to do |format|
+        format.html { render :partial => 'show_form_body', success: true, notice: 'イベントを作成しました' }
+        format.json { redirect_to events, status: :created}
+    end
   end
 
   # GET /events/new
@@ -30,7 +33,6 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    render :partial => 'form_body'
   end
 
   # POST /events

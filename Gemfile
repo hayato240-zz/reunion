@@ -68,3 +68,6 @@ gem 'protected_attributes'
 
 
 gem 'event-calendar', :require => 'event_calendar'
+
+gem 'slim', :require => 'slim-rails'
+gem "slim-rails", "~> 1.1.0"

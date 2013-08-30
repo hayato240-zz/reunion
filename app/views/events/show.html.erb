@@ -1,25 +1,8 @@
 <center>
 <p id="notice"><%= notice %></p>
 <h2>イベント詳細</h2>
-<p>
-  <strong>名前:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>日付:</strong>
-  <%= @event.date %>
-</p>
-
-<p>
-  <strong>場所:</strong>
-  <%= @event.place %>
-</p>
-
-<p>
-  <strong>料金:</strong>
-  <%= @event.price %>
-</p>
+debugger
+<%= render 'show_form_body' %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

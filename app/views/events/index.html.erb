@@ -35,7 +35,7 @@
             <td><%= event.price %></td>
             <td><%= link_to '詳細', event, remote: true, id:'show_event_button' %></td>
             <% if(current_user.id == event.admin_user)%>            
-              <td><%= link_to '編集', edit_event_path(event), remote: true, id: 'edit_event_path' %></td>
+              <td><%= link_to '編集', edit_event_path(event), id: 'edit_event_path' %></td>
               <td><%= link_to '削除', event, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
             <% else %>
               <td></td>
@@ -71,7 +71,7 @@
 <%= javascript_tag do %>
 
 <%# フォームからAjaxで受信%>
-$(document).on('ajax:success', '#event_body', function(xhr,data,status){
+$(document).on('ajax:success', '#event_form', function(xhr,data,status){
   $("#event_body").html(data);
 
   //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
@@ -102,7 +102,7 @@ $(document).on('click', '#save_select_modal_button', function(e){
     $('#event_form').submit();
   });
 
-
+/*
 <%# イベント編集をモーダル表示 %>
 $(document).on('ajax:success', '#edit_event_path', function(xhr,data,status){
   document.getElementById('header-title').innerHTML = '<h3>イベントの編集</h3>';
@@ -125,7 +125,7 @@ $(document).on('click', '#update_select_modal_button', function(e){
     $('#event_modal').modal('hide');
     $('#event_form').submit();
 });
-
+*/
 
 <%# イベント詳細をモーダル表示 %>
 $(document).on('ajax:success', '#show_event_button', function(xhr,data,status){
