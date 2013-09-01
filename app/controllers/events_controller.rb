@@ -19,10 +19,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    respond_to do |format|
-        format.html { render :partial => 'show_form_body', success: true, notice: 'イベントを作成しました' }
-        format.json { redirect_to events, status: :created}
-    end
+
   end
 
   # GET /events/new
