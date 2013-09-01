@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_filter :authenticate
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destory]
+  skip_before_filter :verify_authenticity_token ,:only=>[:create,:edit]
 
   # login check
   def authenticate
@@ -12,13 +13,13 @@ class EventsController < ApplicationController
   def index
     require 'date'
     #.order(:date).
-    @events = Event.all.where('date >= ?', Date.today).order(:date)
+    @events = Event.all.order(:start_at)
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
-    render :partial => 'show_form_body'
+
   end
 
   # GET /events/new
@@ -29,7 +30,6 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    render :partial => 'form_body'
   end
 
   # POST /events
@@ -85,7 +85,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:image,:name, :date, :place, :price, :detail, :prefecture_id)
+      params.require(:event).permit(:image,:name, :date, :place, :price, :detail, :prefecture_id, :start_at, :end_at)
     end
 
     #イベントの作成者以外は、編集削除が出来ないようにする
