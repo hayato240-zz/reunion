@@ -1,4 +1,7 @@
 CNE1Party::Application.routes.draw do
+
+
+
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :via => :get
   get "profile/index"
   get "profile/edit"
@@ -8,7 +11,11 @@ CNE1Party::Application.routes.draw do
   get "login/index"
 
   resources :events
-
+  resources :members, only: [:index, :create, :destroy] do
+    collection do
+      get 'search'
+    end
+  end
   resources :setting, only: [:index] do
     collection do
       get 'edit'

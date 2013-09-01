@@ -101,7 +101,7 @@ $('#close_select_modal_button').click(function(){
 $(document).on('click', '#save_select_modal_button', function(e){
 //    $('#event_form').submit();
     //アップロード、表示
-    $('#event_form').upload('/events',$("#event_form").serialize(),function(html){
+    $('#upload-image').upload('/events',$("#event_form").serialize(),function(html){
               //通信が成功した場合の処理
                 $("#event_body").html(html);
              //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示

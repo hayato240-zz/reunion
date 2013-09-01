@@ -1,0 +1,12 @@
+<table class="table table-hover" align="center">  
+  <% @event_users.each do |user| %>      
+    <tr>
+      <td>
+        <label>
+          <%= check_box 'member', user.id, {class: 'member_check', tag: user.name}, user.id, false %> <%= user.name %>
+        </label>
+          <%#= label_tag "member_#{user.id}", user.name %>
+      </td>
+    </tr>
+  <% end %>
+</table>

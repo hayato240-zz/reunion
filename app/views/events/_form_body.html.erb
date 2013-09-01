@@ -22,10 +22,7 @@
       <tr>
         <td width="20"><%= "イベント画像" %></td>
         <td><%= image_tag @event.image.url(:thumb)%></td>
-        <div id="aiueo">
-        <td><%= f.file_field :image %></td>
-      </div>
-
+        <td id="upload-image"><%= f.file_field :image %></td>
       </tr>
       
       <tr>
@@ -48,9 +45,32 @@
         <td><%= "詳細" %></td>
         <td colspan="2"><%= f.text_area :detail %></td>
       </tr>
+    <% end %>
+
+      <tr>
+        <td><%= "メンバー追加"%></td>
+        <td colspan="2">
+          <div class="search_member">
+            <%= form_tag search_members_path ,  {class: "form_search", method: :get, remote: true }  do %>
+              <%= text_field_tag :q, "", placeholder: "検索" %>
+              <%= submit_tag "search" ,class: "btn search_button"%>
+            <% end %>
+            </div><%# /serach_member %>
+        </td>
+
+      <tr>
+        <td><%= "メンバー"%></td>
+        <td><div id="member-info"></div></td>
+      </tr>
+      </tr>
+
     </tbody>
   </table>
-<% end %>
+
+
+
+  </tbody>
+</table>
 
 <%#= hidden_field_tag 'create', "false", :id => 'render-template' %>
 
@@ -58,4 +78,28 @@
 $(function(){
 　$("#datepicker").datepicker();
 });
+
+//検索フィールド用に、カラーボックスが開いたときに検索結果を取得
+$(document).ready(function(){
+  $.ajax({
+  url: "<%= search_members_path %>",
+  type: "GET",
+  data: {"q": ""},
+  success: function(data)
+  {  
+    $("#member-info").html(data);
+  },
+  error: function(data)
+  {
+    alert("通信に失敗しました");
+  }
+  });
+});
+
+//検索ボタンを押してから戻ってきたデータを用いて、画面に表示
+$(document).on("ajax:success", ".form_search", function(data, status, xhr){
+    alert(status);
+    $("#member-info").html(data);
+  });
+
 </script>
