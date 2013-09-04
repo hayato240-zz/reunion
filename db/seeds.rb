@@ -8,7 +8,10 @@
 # coding: utf-8
 StudyAbroad.delete_all
 Teacher.delete_all
-
+#User
+User.create(:name => 'Uchikawa')
+User.create(:name => 'Sarunyoo')
+User.create(:name => 'Sato')
 
 # StudyAbroad関係
 StudyAbroad.create(:school_name => 'CNE1', :study_from => '2011-01-01', :study_to => '2011-02-01', :user_id => 1)

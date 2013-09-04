@@ -6,9 +6,10 @@ class MembersController < ApplicationController
   end
 
   def search
-  	@event_users = User.select(:id, :name).where.not(id: current_user.id).where("name LIKE ?","%"+params[:q]+"%")
-	render partial: 'members_body'
-=begin	
+    puts "sssssssssssssssssssssssssssssssss",session[:user_id]
+  	@event_users = User.select(:id, :name).where.not(id: session[:user_id]).where("name LIKE ?","%"+params[:q]+"%")
+#	render partial: 'members_body'
+    p "MEMBER:::::",@event_users
   	if request.xml_http_request?
   		render partial: 'members_body'
   	else
@@ -16,7 +17,7 @@ class MembersController < ApplicationController
   			format.html{ redirect_to root_path, notice: '無効なアクセス'}
   		end
   	end
-=end  	
+
   end
 
   def destroy

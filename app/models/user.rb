@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :study_abroads
+  attr_accessible :name
 
   #初回ログインの際に、ユーザ情報をDBに保存
   def self.create_with_omniauth(auth)

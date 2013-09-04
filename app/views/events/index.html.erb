@@ -35,7 +35,7 @@
             <td><%= event.price %></td>
             <td><%= link_to '詳細', event, remote: true, id:'show_event_button' %></td>
             <% if(current_user.id == event.admin_user)%>            
-              <td><%= link_to '編集', edit_event_path(event), id: 'edit_event_path' %></td>
+              <td><%= link_to '編集', edit_event_path(event), id: 'edit_event_path', remote: true%></td>
               <td><%= link_to '削除', event, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
             <% else %>
               <td></td>
@@ -100,7 +100,19 @@ $('#close_select_modal_button').click(function(){
 <%# 「イベント作成」モーダル内の「保存」ボタン %>
 $(document).on('click', '#save_select_modal_button', function(e){
 //    $('#event_form').submit();
-    //アップロード、表示
+
+    var select_member_ids = "";
+    var select_members = $(".partner");
+
+    for(var i = 0; i<select_members.length;i++){
+        select_member_ids += select_members[i].attributes.name.value;
+        if(i != select_members.length - 1)
+          select_member_ids += ",";
+        }
+//    $("#select_members").val(select_member_ids);
+
+
+    //アップロード、表示    
     $('#upload-image').upload('/events',$("#event_form").serialize(),function(html){
               //通信が成功した場合の処理
                 $("#event_body").html(html);
@@ -108,32 +120,8 @@ $(document).on('click', '#save_select_modal_button', function(e){
                if($("#render-template").val()){
                  document.getElementById("save_select_modal_button").style.display="none";
                 }});
-
-
-/*
-  $.ajax({
-    url: 'events',
-    dataType : 'html',
-    type: 'POST',
-//    data : new FormData($form[1]),
-    data: $('#event_form').serialize(),
-    success: function(obj){
-    //通信が成功した場合の処理
-      $("#event_body").html(obj);
-     //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
-     if($("#render-template").val()){
-     document.getElementById("save_select_modal_button").style.display="none";
-    }
-    },
-    error: function(obj){
-      alert('error');
-    }
-
-  });
-*/
   });
 
-/*
 <%# イベント編集をモーダル表示 %>
 $(document).on('ajax:success', '#edit_event_path', function(xhr,data,status){
   document.getElementById('header-title').innerHTML = '<h3>イベントの編集</h3>';
@@ -151,12 +139,22 @@ $('#update_select_close_modal_button').click(function(){
 
 <%# イベント編集用モーダル内の「保存」ボタン %>
 $(document).on('click', '#update_select_modal_button', function(e){
+/*
     e.preventDefault();
 
     $('#event_modal').modal('hide');
     $('#event_form').submit();
+    */
+
+    //アップロード、表示
+    $('#upload-image').upload('/events',$("#event_form").serialize(),function(html){
+              //通信が成功した場合の処理
+                $("#event_body").html(html);
+             //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
+               if($("#render-template").val()){
+                 document.getElementById("save_select_modal_button").style.display="none";
+                }});
 });
-*/
 
 <%# イベント詳細をモーダル表示 %>
 $(document).on('ajax:success', '#show_event_button', function(xhr,data,status){

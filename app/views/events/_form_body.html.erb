@@ -45,22 +45,29 @@
         <td><%= "詳細" %></td>
         <td colspan="2"><%= f.text_area :detail %></td>
       </tr>
+
     <% end %>
 
       <tr>
         <td><%= "メンバー追加"%></td>
         <td colspan="2">
           <div class="search_member">
-            <%= form_tag search_members_path ,  {class: "form_search", method: :get, remote: true }  do %>
+            <%= form_tag search_members_path ,  {class: "form_search", method: :get, remote: true} do %>
               <%= text_field_tag :q, "", placeholder: "検索" %>
-              <%= submit_tag "search" ,class: "btn search_button"%>
+              <%#= submit_tag "search" ,class: "btn search_button"%>
             <% end %>
+
+            <button id="search_member">検索</button>
             </div><%# /serach_member %>
         </td>
 
       <tr>
         <td><%= "メンバー"%></td>
         <td><div id="member-info"></div></td>
+        <td><div class='member_field'>
+
+        <%#= content_tag "span", '', class: "partner"%>
+        </div></td>
       </tr>
       </tr>
 
@@ -79,6 +86,22 @@ $(function(){
 　$("#datepicker").datepicker();
 });
 
+  $(document).on("click", ".member_check", function(){
+    if(this.checked){
+      //既に追加されている名前ははじく
+      if (!$(".member_field").is(":contains('"+ this.attributes.tag.value + "')")) {
+        <%# 選択されたユーザーを表示 %>
+        $(".member_field").append($('<span/>', {name: this.value ,id: this.attributes.tag.value, class: "partner"}).html(
+          this.attributes.tag.value + " "));
+      };
+      
+
+    }else{
+        $("#" + this.attributes.tag.value).remove();
+    }
+  });
+
+
 //検索フィールド用に、カラーボックスが開いたときに検索結果を取得
 $(document).ready(function(){
   $.ajax({
@@ -94,6 +117,23 @@ $(document).ready(function(){
     alert("通信に失敗しました");
   }
   });
+});
+  
+$(document).on('click', '#search_member', function(xhr,data,status){
+  $.ajax({
+  url: "<%= search_members_path %>",
+  type: "GET",
+  data: {"q": $('#q').val()},
+  success: function(data)
+  {  
+    $("#member-info").html(data);
+  },
+  error: function(data)
+  {
+    alert("通信に失敗しました");
+  }
+  });
+
 });
 
 //検索ボタンを押してから戻ってきたデータを用いて、画面に表示
