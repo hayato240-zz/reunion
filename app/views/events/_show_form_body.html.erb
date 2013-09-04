@@ -42,8 +42,20 @@
 			</tr>
 
 			<tr>
-				<td><%= "招待ユーザ" %></td>
-				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: 110).pluck(:user_id)).pluck(:name)%></td>
+				<td><%= "参加" %></td>
+				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 0).pluck(:user_id)).pluck(:name)%></td>
+				<td><%= link_to "参加", add_member_members_path(:attend_status => 0,:event_id => @event.id),:method => 'PUT' %></td>
+			</tr>
+
+			<tr>
+				<td><%= "不参加" %></td>
+				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 1).pluck(:user_id)).pluck(:name)%></td>
+			</tr>
+
+
+			<tr>
+				<td><%= "招待中" %></td>
+				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 2).pluck(:user_id)).pluck(:name)%></td>
 		</tbody>
       </table>
 

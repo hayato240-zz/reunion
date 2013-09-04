@@ -14,6 +14,8 @@ CNE1Party::Application.routes.draw do
   resources :members, only: [:index, :create, :destroy] do
     collection do
       get 'search'
+      put 'add_member'
+      put 'delete_member'
     end
   end
   resources :setting, only: [:index] do

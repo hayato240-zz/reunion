@@ -44,7 +44,7 @@ class EventsController < ApplicationController
 
     is_success = @event.save
 
-       Member.create(event_id: @event.id, user_id: session[:user_id], attend_status: 2)
+       Member.create(event_id: @event.id, user_id: session[:user_id], attend_status: 0)
       # パラメータmemberは、distinctionのカンマ区切りで渡される
       members = params[:member2].split(",")
 
