@@ -6,7 +6,7 @@ class MembersController < ApplicationController
   end
 
   def search
-    puts "sssssssssssssssssssssssssssssssss",session[:user_id]
+
   	@event_users = User.select(:id, :name).where.not(id: session[:user_id]).where("name LIKE ?","%"+params[:q]+"%")
 #	render partial: 'members_body'
     p "MEMBER:::::",@event_users

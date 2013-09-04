@@ -42,8 +42,23 @@ class EventsController < ApplicationController
 
     @event.admin_user = current_user.id
 
+    is_success = @event.save
+
+       Member.create(event_id: @event.id, user_id: session[:user_id], attend_status: 2)
+      # パラメータmemberは、distinctionのカンマ区切りで渡される
+      members = params[:member2].split(",")
+
+
+      #グループに参加しているメンバーをDBに保存
+      if(members)
+        members.each{|user_id|
+          user = User.find_by(id: user_id) 
+          member = Member.create(:event_id => @event.id, :user_id => user_id, attend_status: 2) if user
+        }
+      end
+
     respond_to do |format|
-      if @event.save
+      if is_success
         format.html { render :partial => 'show_form_body', success: true, notice: 'イベントを作成しました' }
         format.json { render action: 'index', status: :created}
       else

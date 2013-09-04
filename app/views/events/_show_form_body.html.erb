@@ -40,6 +40,10 @@
 				<td><%= "詳細" %></td>
 				<td><%= @event.detail %></td>
 			</tr>
+
+			<tr>
+				<td><%= "招待ユーザ" %></td>
+				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: 110).pluck(:user_id)).pluck(:name)%></td>
 		</tbody>
       </table>
 

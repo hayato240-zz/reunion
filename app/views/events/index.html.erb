@@ -33,7 +33,7 @@
             <td><%= Prefecture.find(event.prefecture_id).name %></td>
             <td><%= event.place %></td>
             <td><%= event.price %></td>
-            <td><%= link_to '詳細', event, remote: true, id:'show_event_button' %></td>
+            <td><%= link_to '詳細', event, id:'show_event_button' %></td>
             <% if(current_user.id == event.admin_user)%>            
               <td><%= link_to '編集', edit_event_path(event), id: 'edit_event_path', remote: true%></td>
               <td><%= link_to '削除', event, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
@@ -109,7 +109,7 @@ $(document).on('click', '#save_select_modal_button', function(e){
         if(i != select_members.length - 1)
           select_member_ids += ",";
         }
-//    $("#select_members").val(select_member_ids);
+    $("#select_members").val(select_member_ids);
 
 
     //アップロード、表示    

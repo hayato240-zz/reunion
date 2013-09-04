@@ -45,7 +45,7 @@
         <td><%= "詳細" %></td>
         <td colspan="2"><%= f.text_area :detail %></td>
       </tr>
-
+      <%= hidden_field_tag "select_members", '', name: 'member2', value: "" %>
     <% end %>
 
       <tr>
