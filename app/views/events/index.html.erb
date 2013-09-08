@@ -111,10 +111,9 @@ $(document).on('click', '#save_select_modal_button', function(e){
         }
     $("#select_members").val(select_member_ids);
 
-
     //アップロード、表示    
     $('#upload-image').upload('/events',$("#event_form").serialize(),function(html){
-              //通信が成功した場合の処理
+             //通信が成功した場合の処理
                 $("#event_body").html(html);
              //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
                if($("#render-template").val()){
@@ -169,6 +168,11 @@ $('#show_select_close_modal_button').click(function(){
   $('#event_modal').modal('hide');
 });
 
+$(document).on('ajax:success', '#add_member', function(xhr,data,status){
+  $("#members_status").html(data);
+
+
+})
 
 
 <% end %>

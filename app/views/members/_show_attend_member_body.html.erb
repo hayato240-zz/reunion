@@ -1,0 +1,18 @@
+<tr>
+	<td><%= "参加" %></td>
+	<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 0).pluck(:user_id)).pluck(:name)%></td>
+	<% if @event.admin_user != session[:user_id]  %>
+	<td><%= link_to "参加", update_member_members_path(:attend_status => 0,:event_id => @event.id),:method => 'PUT',:class => 'btn btn-primary', :id => 'add_member'  %></td>
+	<% end %>
+</tr>
+
+<tr>
+	<td><%= "不参加" %></td>
+	<% if @event.admin_user != session[:user_id]  %>
+	<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 1).pluck(:user_id)).pluck(:name)%></td>
+	<% end %>
+</tr>
+<tr>
+	<td><%= "招待中" %></td>
+	<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 2).pluck(:user_id)).pluck(:name)%></td>
+</tr>
