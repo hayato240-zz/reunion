@@ -1,8 +1,66 @@
 <center>
 <p id="notice"><%= notice %></p>
 <h2>イベント詳細</h2>
+
+<div id='show_form'>
 <%= render 'show_form_body' %>
+</div>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', calendar_path %>
 </center>
+
+<%= javascript_tag do %>
+
+<%# 参加ボタン(UPDATE) %>
+$(document).on('click', '#update_member2', function(e){
+    //アップロード、表示
+	$.ajax({
+          type: 'PUT',
+          url: '/members/update_member',
+          dataType: 'html',
+          data: {   event_id: <%= @event.id%>,
+                    attend_status: 0
+                    },
+          success: function(data) {
+          $('#show_form').html(data);
+        }
+     });
+});
+
+<%# 参加ボタン(CREATE) %>
+$(document).on('click', '#add_member2', function(e){
+    //アップロード、表示
+	$.ajax({
+          type: 'POST',
+          url: '/members',
+          dataType: 'html',
+          data: {   event_id: <%= @event.id%>,
+                    attend_status: 0
+                    },
+          success: function(data) {
+          $('#show_form').html(data);
+        }
+     });
+});
+
+<%# 不参加ボタン %>
+$(document).on('click', '#delete_member2', function(e){
+    //アップロード、表示
+	$.ajax({
+          type: 'PUT',
+          url: '/members/update_member',
+          dataType: 'html',
+          data: {   event_id: <%= @event.id%>,
+                    attend_status: 1
+                    },
+          success: function(data) {
+          $('#show_form').html(data);
+        }
+     });
+});
+
+
+
+
+<% end %>

@@ -1,18 +1,37 @@
-<tr>
-	<td><%= "参加" %></td>
-	<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 0).pluck(:user_id)).pluck(:name)%></td>
-	<% if @event.admin_user != session[:user_id]  %>
-	<td><%= link_to "参加", update_member_members_path(:attend_status => 0,:event_id => @event.id),:method => 'PUT',:class => 'btn btn-primary', :id => 'add_member'  %></td>
-	<% end %>
-</tr>
+			<tr>
+				<td><%= "参加" %></td>
 
-<tr>
-	<td><%= "不参加" %></td>
-	<% if @event.admin_user != session[:user_id]  %>
-	<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 1).pluck(:user_id)).pluck(:name)%></td>
-	<% end %>
-</tr>
-<tr>
-	<td><%= "招待中" %></td>
-	<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 2).pluck(:user_id)).pluck(:name)%></td>
-</tr>
+				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 0).pluck(:user_id)).pluck(:name)%></td>
+
+				<% if member = Member.where(user_id: session[:user_id], event_id: @event.id).last  %>
+					<% if member.attend_status != 0%>
+
+						<td><%= link_to "参加ssss", update_member_members_path(:attend_status => 0, remote: true,:member_id => member.id, :event_id => @event.id),:method => 'PUT',:class => 'btn btn-primary', :id => 'update_member'  %></td>
+					<% end %>
+				<% else %>
+						<td><%= link_to "参加", members_path(:attend_status => 0,:event_id => @event.id), remote: true,:method => 'POST',:class => 'btn btn-primary', :id => 'add_member'  %></td>
+				<% end %>
+			</tr>
+
+			<tr>
+				<td><%= "不参加" %></td>
+				<% if @event.admin_user != session[:user_id]  %>
+				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 1).pluck(:user_id)).pluck(:name)%></td>
+
+				<td>
+				<% if member = Member.where(user_id: session[:user_id], event_id: @event.id).last  %>
+					<%# すでに欠席にボタンを押されてある場合は、欠席ボタンを表示しない%>
+					<% unless member.attend_status == 1 %>
+						<td><%= link_to "不参加", update_member_members_path(:attend_status => 1,:member_id => member.id,:event_id => @event.id),:method => 'PUT',:class => 'btn btn-primary', :id => 'delete_member'  %></td>
+					<% end %>
+				<% end %>
+
+				</td>
+
+				<% end %>
+			</tr>
+
+			<tr>
+				<td><%= "招待中" %></td>
+				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 2).pluck(:user_id)).pluck(:name)%></td>
+			</tr>
