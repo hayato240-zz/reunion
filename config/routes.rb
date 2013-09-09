@@ -15,7 +15,6 @@ CNE1Party::Application.routes.draw do
     collection do
       get 'search'
       put 'update_member'
-      put 'absent_member'
     end
   end
   resources :setting, only: [:index] do
