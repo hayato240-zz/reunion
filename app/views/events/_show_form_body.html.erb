@@ -51,7 +51,7 @@
 				<td><%= "招待中" %></td>
 				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 2).pluck(:user_id)).pluck(:name)%></td>
 			</tr>
-
+			<%= hidden_field_tag 'render-template', value: nil%>
 
 		</tbody>
       </table>
@@ -59,7 +59,7 @@
     </div>
 </div>
 
-
+<%= hidden_field_tag 'create', true, :id => 'render-template' %>
 
 <%= javascript_tag do %>
 

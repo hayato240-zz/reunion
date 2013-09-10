@@ -70,6 +70,7 @@
 
 <%= javascript_tag do %>
 
+
 <%# フォームからAjaxで受信%>
 /*
 $(document).on('ajax:success', '#event_form', function(xhr,data,status){
@@ -99,8 +100,6 @@ $('#close_select_modal_button').click(function(){
 
 <%# 「イベント作成」モーダル内の「保存」ボタン %>
 $(document).on('click', '#save_select_modal_button', function(e){
-//    $('#event_form').submit();
-
     var select_member_ids = "";
     var select_members = $(".partner");
 
@@ -112,13 +111,32 @@ $(document).on('click', '#save_select_modal_button', function(e){
     $("#select_members").val(select_member_ids);
 
     //アップロード、表示
+    if(image_include){
     $('#upload-image').upload('/events',$("#event_form").serialize(),function(html){
+
              //通信が成功した場合の処理
                 $("#event_body").html(html);
              //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
                if($("#render-template").val()){
                  document.getElementById("save_select_modal_button").style.display="none";
                 }});
+              }
+              else{
+              $.ajax({
+                type: 'POST',
+                url: '/events',
+                dataType: 'html',
+                data: $('#event_form').serialize(),
+                success: function(data){
+                $("#event_body").html(data);
+
+               if($("#render-template").val()){
+                 document.getElementById("save_select_modal_button").style.display="none";
+
+              }
+
+            }});
+            }
   });
 
 <%# イベント編集をモーダル表示 %>
@@ -144,15 +162,27 @@ $(document).on('click', '#update_select_modal_button', function(e){
     $('#event_modal').modal('hide');
     $('#event_form').submit();
     */
+    if(image_include){
 
-    //アップロード、表示
-    $('#upload-image').upload('/events',$("#event_form").serialize(),function(html){
-              //通信が成功した場合の処理
-                $("#event_body").html(html);
-             //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
+  }
+  else{
+              $.ajax({
+                type: 'PUT',
+                url: '/events/',
+                dataType: 'html',
+                data: $('#event_form').serialize(),
+                success: function(data){
+                $("#event_body").html(data);
+
                if($("#render-template").val()){
                  document.getElementById("save_select_modal_button").style.display="none";
-                }});
+
+              }
+
+            }});
+
+}
+
 });
 
 <%# イベント詳細をモーダル表示 %>

@@ -23,7 +23,7 @@
 
       <tr>
         <td width="20"><%= "イベント画像" %></td>
-        <td><%= image_tag @event.image.url(:thumb)%></td>
+        <td id="current-image"><%= image_tag @event.image.url(:thumb)%></td>
         <td id="upload-image"><%= f.file_field :image %></td>
       </tr>
       
@@ -82,8 +82,16 @@
 </table>
 
 <%#= hidden_field_tag 'create', "false", :id => 'render-template' %>
+<%#= hidden_field_tag 'event', @event.id, :id => 'event_id' %>
 
 <script type="text/javascript">
+  image_include = false;
+
+ $('#upload-image').change(function(){
+    image_include = true;
+ });
+
+
 $(function(){
 　$("#datepicker").datepicker();
 });

@@ -53,8 +53,9 @@
     </tbody>
   </table>
 <% end %>
-
+<%= hidden_field_tag 'event', @event.id, :id => 'event_id' %>
 <%#= hidden_field_tag 'create', "false", :id => 'render-template' %>
+
 
 <script type="text/javascript">
 $(function(){
