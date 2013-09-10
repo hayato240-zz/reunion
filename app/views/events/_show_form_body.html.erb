@@ -1,11 +1,15 @@
+<% if @event.admin_user != session[:user_id]%>
+	<div class="btn btn-large" id="add_member_<%= @event.id%>">参加</div>
+	<div class="btn btn-large" id="delete_member_<%= @event.id %>">不参加</div>
+<% end %>
  <div class="tab-content">
     <div class="tab-pane active" id="my_group">
-      <table class="table table-hover" align="center">
+      <table class="table table-hover" id="event_table" align="center">
 		<tbody>
 
 				<td><%= "名前"%></td>
 				<td><%= @event.name%></td>
-			</tr>
+				</tr>
 			<tr>
 				<td><%= "イベント画像" %></td>
 				<td><%= image_tag @event.image.url(:thumb) %></td>
@@ -28,41 +32,18 @@
 				<td><%= @event.detail %></td>
 			</tr>
 
-		<div class="members_body" id="members_status">
 			<tr>
+
 				<td><%= "参加" %></td>
 
 				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 0).pluck(:user_id)).pluck(:name)%></td>
-
-				<% if @member = Member.where(user_id: session[:user_id], event_id: @event.id).last  %>
-					<% if @member.attend_status != 0%>
-
-<!--						<td><button class="btn btn-large" id="update_member">参加</button></td> -->
-					<td><%= link_to '参加', update_member_members_path(event_id: @event.id, attend_status: 0),:method => 'PUT'  %></td>
-					<% end %>
-				<% else %>
-<!--						<td><button class="btn btn-large" id="add_member">参加</button></td> -->
-					<td>
-						<%= link_to '参加', members_path(event_id: @event.id, attend_status: 0), :method => 'POST' %>
-					</td>
-				<% end %>
 			</tr>
 
-<div id="aaaaaaaaaaaaa"></div>
 			<tr>
 				<td><%= "不参加" %></td>
 				<% if @event.admin_user != session[:user_id]  %>
 					<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 1).pluck(:user_id)).pluck(:name)%>
-					</td>
-
-					<% if @member = Member.where(user_id: session[:user_id], event_id: @event.id).last  %>
-						<%# すでに欠席にボタンを押されてある場合は、欠席ボタンを表示しない%>
-						<% unless @member.attend_status == 1 %>
-<!--							<td><button class="btn btn-large" id="delete_member">不参加</button>
-							</td>-->
-					<td><%= link_to '不参加', update_member_members_path(event_id: @event.id, attend_status: 1),:method => 'PUT'  %></td>
-						<% end %>
-					<% end %>
+					</td>					
 				<% end %>
 			</tr>
 
@@ -70,7 +51,7 @@
 				<td><%= "招待中" %></td>
 				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 2).pluck(:user_id)).pluck(:name)%></td>
 			</tr>
-		</div>
+
 
 		</tbody>
       </table>
@@ -81,42 +62,26 @@
 
 
 <%= javascript_tag do %>
-/*
-<%# 参加ボタン(UPDATE) %>
-$(document).on('click', '#update_member', function(e){
 
-    //アップロード、表示
-	$.ajax({
-          type: 'PUT',
-          url: '/members/update_member',
-          dataType: 'html',
-          data: {   event_id: <%= @event.id%>,
-                    attend_status: 0
-                    },
-          success: function(data) {
-          $('#members_status').html(data);
-        }
-     });
-});
+<%# 参加ボタン(PUT join) %>
+$(document).on('click', '#add_member_<%= @event.id%>', function(e){
 
-<%# 参加ボタン(CREATE) %>
-$(document).on('click', '#add_member', function(e){
     //アップロード、表示
 	$.ajax({
           type: 'POST',
-          url: '/members',
+          url: '/members/join',
           dataType: 'html',
           data: {   event_id: <%= @event.id%>,
                     attend_status: 0
                     },
           success: function(data) {
-          $('#members_status').html(data);
+          $('#event_table').html(data);
         }
      });
 });
 
 <%# 不参加ボタン %>
-$(document).on('click', '#delete_member', function(e){
+$(document).on('click', '#delete_member_<%= @event.id%>', function(e){
     //アップロード、表示
 	$.ajax({
           type: 'PUT',
@@ -126,12 +91,12 @@ $(document).on('click', '#delete_member', function(e){
                     attend_status: 1
                     },
           success: function(data) {
-          $('#members_status').html(data);
+          $('#event_table').html(data);
         }
      });
 });
 
 
 
-*/
+
 <% end %>

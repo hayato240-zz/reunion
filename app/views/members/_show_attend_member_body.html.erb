@@ -1,31 +1,42 @@
+		<tbody>
+
+				<td><%= "名前"%></td>
+				<td><%= @event.name%></td>
+				</tr>
 			<tr>
+				<td><%= "イベント画像" %></td>
+				<td><%= image_tag @event.image.url(:thumb) %></td>
+			<tr>
+
+			<tr>
+				<td><%= "都道府県" %></td>
+				<td><%= Prefecture.find(@event.prefecture_id).name%>
+			</tr>
+			<tr>
+				<td><%= "場所"%></td>
+				<td><%= @event.place%></td>
+			</tr>
+			<tr>
+				<td><%= "料金"%></td>
+				<td><%= @event.price%></td>
+			</tr>
+			<tr>
+				<td><%= "詳細" %></td>
+				<td><%= @event.detail %></td>
+			</tr>
+
+			<tr>
+
 				<td><%= "参加" %></td>
 
 				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 0).pluck(:user_id)).pluck(:name)%></td>
-
-				<% if @member = Member.where(user_id: session[:user_id], event_id: @event.id).last  %>
-					<% if @member.attend_status != 0%>
-
-						<td><button class="btn btn-large" id="update_member">参加</button></td>
-					<% end %>
-				<% else %>
-						<td><button class="btn btn-large" id="add_member">参加</button></td>
-				<% end %>
 			</tr>
 
 			<tr>
 				<td><%= "不参加" %></td>
 				<% if @event.admin_user != session[:user_id]  %>
 					<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 1).pluck(:user_id)).pluck(:name)%>
-					</td>
-
-					<% if @member = Member.where(user_id: session[:user_id], event_id: @event.id).last  %>
-						<%# すでに欠席にボタンを押されてある場合は、欠席ボタンを表示しない%>
-						<% unless @member.attend_status == 1 %>
-							<td><button class="btn btn-large" id="delete_member">不参加</button>
-							</td>
-						<% end %>
-					<% end %>
+					</td>					
 				<% end %>
 			</tr>
 
@@ -33,3 +44,6 @@
 				<td><%= "招待中" %></td>
 				<td><%= User.select(:name).where(id: Member.select(:user_id).where(event_id: @event.id, attend_status: 2).pluck(:user_id)).pluck(:name)%></td>
 			</tr>
+
+
+		</tbody>

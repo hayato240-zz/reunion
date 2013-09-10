@@ -111,7 +111,7 @@ $(document).on('click', '#save_select_modal_button', function(e){
         }
     $("#select_members").val(select_member_ids);
 
-    //アップロード、表示    
+    //アップロード、表示
     $('#upload-image').upload('/events',$("#event_form").serialize(),function(html){
              //通信が成功した場合の処理
                 $("#event_body").html(html);
