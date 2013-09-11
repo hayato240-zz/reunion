@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_filter :authenticate
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destory]
-  skip_before_filter :verify_authenticity_token ,:only=>[:create,:edit]
+  skip_before_filter :verify_authenticity_token ,:only=>[:create,:edit,:update]
 
   # login check
   def authenticate

@@ -64,6 +64,7 @@
 
   <div class="modal-footer">
     <button class="btn btn-large" id="save_select_modal_button">保存</button>
+    <button class="btn btn-large" id="update_select_modal_button">更新</button>
     <button class="btn btn-large" id="close_select_modal_button">閉じる</button>
   </div>
 </div>
@@ -163,12 +164,19 @@ $(document).on('click', '#update_select_modal_button', function(e){
     $('#event_form').submit();
     */
     if(image_include){
+    $('#upload-image').upload('/events/'+event_id,$("#event_form").serialize(),function(html){
 
+             //通信が成功した場合の処理
+                $("#event_body").html(html);
+             //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
+               if($("#render-template").val()){
+                 document.getElementById("save_select_modal_button").style.display="none";
+                }});
   }
   else{
               $.ajax({
                 type: 'PUT',
-                url: '/events/',
+                url: '/events/'+event_id,
                 dataType: 'html',
                 data: $('#event_form').serialize(),
                 success: function(data){
