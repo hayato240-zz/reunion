@@ -85,7 +85,8 @@ $(document).on('ajax:success', '#event_form', function(xhr,data,status){
 */
 <%# 「イベント作成」のモーダルを表示 %>
 $(document).on('ajax:success', '#add_event_button', function(xhr,data,status){
-  document.getElementById("save_select_modal_button").style.display="";
+   document.getElementById("save_select_modal_button").style.display="";
+  document.getElementById("update_select_modal_button").style.display="none";
   document.getElementById('header-title').innerHTML = '<h3>イベントの作成</h3>';
   $("#event_body").html(data);
   $("#event_modal").modal("show");
@@ -120,6 +121,7 @@ $(document).on('click', '#save_select_modal_button', function(e){
              //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
                if($("#render-template").val()){
                  document.getElementById("save_select_modal_button").style.display="none";
+                 document.getElementById("update_select_modal_button").style.display="none";
                 }});
               }
               else{
@@ -133,6 +135,7 @@ $(document).on('click', '#save_select_modal_button', function(e){
 
                if($("#render-template").val()){
                  document.getElementById("save_select_modal_button").style.display="none";
+                 document.getElementById("update_select_modal_button").style.display="none";
 
               }
 
@@ -145,7 +148,8 @@ $(document).on('ajax:success', '#edit_event_path', function(xhr,data,status){
   document.getElementById('header-title').innerHTML = '<h3>イベントの編集</h3>';
   $("#event_body").html(data);
   $("#event_modal").modal("show");
-  document.getElementById("save_select_modal_button").style.display="";
+  document.getElementById("save_select_modal_button").style.display="none";
+  document.getElementById("update_select_modal_button").style.display="";
 });
 
 <%# イベント編集用モーダル内の「閉じる」ボタン %>
@@ -171,6 +175,7 @@ $(document).on('click', '#update_select_modal_button', function(e){
              //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
                if($("#render-template").val()){
                  document.getElementById("save_select_modal_button").style.display="none";
+               document.getElementById("update_select_modal_button").style.display="none";
                 }});
   }
   else{
