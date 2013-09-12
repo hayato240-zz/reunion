@@ -1,7 +1,9 @@
 
 <center>
 <h1>プロフィール</h1>
-
+<%= link_to 'プロフィール編集', profile_edit_path, remote: true, id: 'update_profile_button' ,:class => 'btn btn-primary'  %>
+	
+<div id="profile_body">
 <p>
   <strong>名前:</strong>
   <%= @user.name %>
@@ -24,4 +26,43 @@
 </p>	
 <% end %>
 </p>
+</div>
+
+
+<button class="btn btn-large" id="update_profile_<%= @user.id %>">保存</button>
 </center>
+
+
+<%= javascript_tag do %>
+
+$(document).on('ajax:success', '#update_profile_button', function(xhr,data,status){
+  $("#profile_body").html(data);
+
+	});
+
+<%# 「イベント作成」モーダル内の「保存」ボタン %>
+$(document).on('click', '#update_profile_<%= @user.id %>', function(e){
+	
+    //アップロード、表示
+    /*
+    if(image_include){
+    $('#upload-image').upload(<%= profile_update_path %>,$("#profile_form").serialize(),function(html){
+                $("#profile_body").html(html);           
+              }
+    else{
+              $.ajax({
+                type: 'POST',
+                url: <%= profile_update_path %>
+                dataType: 'html',
+                data: $('#profile_form').serialize(),
+                success: function(data){
+                $("#profile_body").html(data);
+            }});
+    }
+    */	
+  }
+  );
+
+
+
+<% end%>

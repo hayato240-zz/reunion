@@ -18,6 +18,12 @@ CNE1Party::Application.routes.draw do
       post 'join'
     end
   end
+
+  resources :users do
+      resources :study_abroads
+  end
+
+
   resources :setting, only: [:index] do
     collection do
       get 'edit'

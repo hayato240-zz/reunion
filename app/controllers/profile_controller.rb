@@ -10,6 +10,8 @@ class ProfileController < ApplicationController
   end
 
   def edit
+    @user = current_user
+    render :partial => 'edit_body'
   end
 
   def create
