@@ -4,28 +4,34 @@
 <%= link_to 'プロフィール編集', profile_edit_path, remote: true, id: 'update_profile_button' ,:class => 'btn btn-primary'  %>
 	
 <div id="profile_body">
-<p>
-  <strong>名前:</strong>
-  <%= @user.name %>
-</p>
+ <table class="table table-hover" align="center">
+    <tbody>
 
-<p>
-  <strong>画像:</strong>
-  <%= image_tag @user.image(:thumb) %>
-</p>
-<p>
+      <tr>
+        <td colspan="2"><%= "名前"%></td>
+        <td colspan="2"><%= @user.name%></td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= "ユーザの画像" %></td>
+        <td><%= image_tag @user.image.url(:thumb)%></td>
+      </tr>
 
-<p>
-	<strong>留学情報</strong>
-<% @user.study_abroads.each do |study_abroad| %>
-<p>
-	<strong>学校名:</strong>
-	<%= study_abroad.school_name %>
-	<strong>期間:</strong>
-	<%= study_abroad.study_from.to_s + " ~ " + study_abroad.study_to.to_s %>
-</p>	
-<% end %>
-</p>
+ <% @user.study_abroads.each do |sh| %>
+    <td><%= "留学先"%></td>
+    <td colspan="2"><%= sh.school_name%></td>
+  </tr>
+  <tr>
+    <td><%= "留学期間"%></td>
+    <td colspan="2"><%= sh.study_from.to_s+"~"+ sh.study_to.to_s%></td>
+  </tr>
+  <tr>
+    <td><%= "先生" %></td>
+    <td colspan="2"><%= sh.teacher %></td>
+  </tr>
+  <% end %>
+
+    </tbody>
+  </table>
 </div>
 
 
@@ -37,8 +43,10 @@
 
 $(document).on('ajax:success', '#update_profile_button', function(xhr,data,status){
   $("#profile_body").html(data);
-
+	 	   document.getElementById("update_profile_<%= @user.id %>").style.display = "";
+   	 	   document.getElementById("update_profile_button").style.display = "none";
 	});
+
 
 <%# 「イベント作成」モーダル内の「保存」ボタン %>
 $(document).on('click', '#update_profile_<%= @user.id %>', function(e){
@@ -47,20 +55,26 @@ $(document).on('click', '#update_profile_<%= @user.id %>', function(e){
 
     if(image_include){
  	   $('#upload-image').upload('/profile/update',$("#profile_form").serialize(),function(html){
-	 	   $('#profile_form').html(html);
+	 	   $('#profile_body').html(html);
+
+	 	   document.getElementById("update_profile_<%= @user.id %>").style.display = "none";
+   	 	   document.getElementById("update_profile_button").style.display = "";
+
               });
 
 
+
   }
-                else{
+    else{
               $.ajax({
                 type: 'PUT',
                 url: '/profile/update',
                 dataType: 'html',
                 data: $('#profile_form').serialize(),
                 success: function(data){
-                $("#profile_form").html(data);
-
+                $("#profile_body").html(data);
+	 	   document.getElementById("update_profile_<%= @user.id %>").style.display = "none";
+   	 	   document.getElementById("update_profile_button").style.display = "";
             }});
 }
   });

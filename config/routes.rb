@@ -6,6 +6,7 @@ CNE1Party::Application.routes.draw do
   get "profile/index"
   get "profile/edit"
   get "profile/create"
+  put "profile/update"
   patch "profile/update"
   get "profile/destroy"
   get "login/index"

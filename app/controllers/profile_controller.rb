@@ -19,11 +19,17 @@ skip_before_filter :verify_authenticity_token
 
   def update
     @user = current_user
-    @user.update(user_params)
+    is_success = @user.update(params[:user])
 
+#    render :partial => 'show_body'
 
-
-    render :partial => 'show_body'
+    respond_to do |format|
+      if is_success
+        format.html { render :partial => 'show_body', success: true, notice: 'イベントを作成しました' }
+      else
+        format.html { render :partial => 'edit_body',success: false, notice: 'イベントに失敗しました' }
+      end
+    end
   end
 
   def destroy
@@ -31,10 +37,7 @@ skip_before_filter :verify_authenticity_token
 
   private
   def user_params
-    params.require(:user).permit(:name, :image)
-  end
-  def study_abroads_params
-    params.require(:study_abroads_attributes).permit(:school_name, :study_from,:study_to,:user_id)
+    params.require(:user).permit(:name, :image,:study_abroads)
   end
 
 end

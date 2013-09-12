@@ -16,28 +16,32 @@
 
       <tr>
         <td colspan="2"><%= "名前"%></td>
-        <td colspan="2"><%= f.text_field :name%></td>
+        <td ><%= f.text_field :name%></td>
       </tr>
       <tr>
         <td colspan="2"><%= "ユーザの画像" %></td>
         <td><%= image_tag @user.image.url(:thumb)%></td>
         <td id="upload-image"><%= f.file_field :image %></td>
       </tr>
-        <%= @user.study_abroads[0].school_name %>
 
  <%= f.fields_for :study_abroads do |sh| %>
  <tr>
-    <td><%= "留学先"%></td>
-    <td colspan="2"><%= sh.text_field :school_name%></td>
+    <td colspan="2"><%= "留学先"%></td>
+    <td ><%= sh.text_field :school_name%></td>
   </tr>
   <tr>
-    <td><%= "留学期間"%></td>
-    <td colspan="2"><%= sh.text_field :start_at, :type=>'date', :value=>Date.today %>から<%= f.text_field :end_at, :type=>'date',:value=>Date.today %></td>
+    <td colspan="2"><%= "留学期間"%></td>
+    <td><%= sh.text_field :study_from, :type=>'date', :value=>Date.today %>から<%= sh.text_field :study_to, :type=>'date',:value=>Date.today %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= "先生"%></td>
+    <td><%= sh.text_field :teacher %></td>
   </tr>
 
   <tr>
     <td><%= " " %></td>
   </tr>
+
   <% end %>
 
     </tbody>
