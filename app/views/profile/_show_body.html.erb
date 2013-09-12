@@ -16,22 +16,23 @@
 
       <tr>
         <td colspan="2"><%= "名前"%></td>
-        <td colspan="2"><%= :name%></td>
+        <td colspan="2"><%= @user.name%></td>
       </tr>
       <tr>
         <td colspan="2"><%= "ユーザの画像" %></td>
         <td><%= image_tag @user.image.url(:thumb)%></td>
       </tr>
 
- <%= f.fields_for :study_abroads do |sh| %>
- <tr>
+ <% @user.study_abroads.each do |sh| %>
     <td><%= "留学先"%></td>
-    <td colspan="2"><%= :school_name%></td>
+    <td colspan="2"><%= sh.school_name%></td>
   </tr>
   <tr>
     <td><%= "留学期間"%></td>
-    <td colspan="2"><%= :start_at %>から<%= :end_at %></td>
+    <td colspan="2"><%= sh.study_from.to_s+"~"+ sh.study_to.to_s%></td>
   </tr>
+
+
 
   <tr>
     <td><%= " " %></td>

@@ -1,5 +1,5 @@
 class ProfileController < ApplicationController
-  before_filter :authenticate
+skip_before_filter :verify_authenticity_token
 
   def authenticate
       redirect_to login_index_path unless current_user
@@ -18,8 +18,23 @@ class ProfileController < ApplicationController
   end
 
   def update
+    @user = current_user
+    @user.update(user_params)
+
+
+
+    render :partial => 'show_body'
   end
 
   def destroy
   end
+
+  private
+  def user_params
+    params.require(:user).permit(:name, :image)
+  end
+  def study_abroads_params
+    params.require(:study_abroads_attributes).permit(:school_name, :study_from,:study_to,:user_id)
+  end
+
 end

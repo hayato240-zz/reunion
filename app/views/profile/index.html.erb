@@ -11,7 +11,7 @@
 
 <p>
   <strong>画像:</strong>
-  <%= image_tag @user.image %>
+  <%= image_tag @user.image(:thumb) %>
 </p>
 <p>
 
@@ -44,24 +44,26 @@ $(document).on('ajax:success', '#update_profile_button', function(xhr,data,statu
 $(document).on('click', '#update_profile_<%= @user.id %>', function(e){
 	
     //アップロード、表示
-    /*
+
     if(image_include){
-    $('#upload-image').upload(<%= profile_update_path %>,$("#profile_form").serialize(),function(html){
-                $("#profile_body").html(html);           
-              }
-    else{
+ 	   $('#upload-image').upload('/profile/update',$("#profile_form").serialize(),function(html){
+	 	   $('#profile_form').html(html);
+              });
+
+
+  }
+                else{
               $.ajax({
-                type: 'POST',
-                url: <%= profile_update_path %>
+                type: 'PUT',
+                url: '/profile/update',
                 dataType: 'html',
                 data: $('#profile_form').serialize(),
                 success: function(data){
-                $("#profile_body").html(data);
+                $("#profile_form").html(data);
+
             }});
-    }
-    */	
-  }
-  );
+}
+  });
 
 
 
