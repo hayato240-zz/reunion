@@ -2,15 +2,13 @@
 <html>
 <head>
   <title>CNE1Party</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application"%>
 
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-
   <%= csrf_meta_tags %>
 </head>
 <body>
-
  <%# if user_signed_in? %>
     <div class="container-fluid">
       <div id="header">
@@ -19,7 +17,7 @@
             <a class="brand">フィリピン留学</a>
             <ul class="nav">
               <li><%= link_to "カレンダー", calendar_path %></li>
-              <li><%= link_to "イベントリスト" , root_path %></li>
+              <li><%= link_to "イベントリスト" ,  events_path %></li>
               <li><%= link_to "プロフィール", profile_index_path %></li>
               <li><%= link_to "設定"%>
             </ul>
@@ -30,14 +28,17 @@
              <% else %>  
                <%= link_to "facebookでlogin", "/auth/facebook", :class => 'btn btn-primary' %>
              <% end %>             
-           </div>
+           </div><%# div align%>
 
-          </div>
-        </div>
+          </div><%# div navbor-inner%>
+        </div><%# navboar navbar-primary%>
+      </div><%# header%>
+      
+      <div id="body">  
+        <%= yield %>
       </div>
+  </div>
 
-
-<%= yield %>
 
 </body>
 </html>

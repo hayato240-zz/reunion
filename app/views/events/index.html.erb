@@ -63,12 +63,12 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-large" id="save_select_modal_button_<%= @events[0].id %>">保存</button>
-    <button class="btn btn-large" id="update_select_modal_button_<%= @events[0].id %>">更新</button>
+    <button class="btn btn-large" id="save_select_modal_button">保存</button>
+    <button class="btn btn-large" id="update_select_modal_button">更新</button>
     <button class="btn btn-large" id="close_select_modal_button">閉じる</button>
   </div>
 </div>
-
+</center>
 <%= javascript_tag do %>
 
 
@@ -85,8 +85,8 @@ $(document).on('ajax:success', '#event_form', function(xhr,data,status){
 */
 <%# 「イベント作成」のモーダルを表示 %>
 $(document).on('ajax:success', '#add_event_button', function(xhr,data,status){
-   document.getElementById("save_select_modal_button_<%= @events[0].id %>").style.display="";
-  document.getElementById("update_select_modal_button_<%= @events[0].id %>").style.display="none";
+   document.getElementById("save_select_modal_button").style.display="";
+  document.getElementById("update_select_modal_button").style.display="none";
   document.getElementById('header-title').innerHTML = '<h3>イベントの作成</h3>';
   $("#event_body").html(data);
   $("#event_modal").modal("show");
@@ -101,7 +101,7 @@ $('#close_select_modal_button').click(function(){
 });
 
 <%# 「イベント作成」モーダル内の「保存」ボタン %>
-$(document).on('click', '#save_select_modal_button_<%= @events[0].id %>', function(e){
+$(document).on('click', '#save_select_modal_button', function(e){
     var select_member_ids = "";
     var select_members = $(".partner");
 
@@ -148,8 +148,8 @@ $(document).on('ajax:success', '#edit_event_path', function(xhr,data,status){
   document.getElementById('header-title').innerHTML = '<h3>イベントの編集</h3>';
   $("#event_body").html(data);
   $("#event_modal").modal("show");
-  document.getElementById("save_select_modal_button_<%= @events[0].id %>").style.display="none";
-  document.getElementById("update_select_modal_button_<%= @events[0].id %>").style.display="";
+  document.getElementById("save_select_modal_button").style.display="none";
+  document.getElementById("update_select_modal_button").style.display="";
 });
 
 <%# イベント編集用モーダル内の「閉じる」ボタン %>
@@ -160,7 +160,7 @@ $('#update_select_close_modal_button').click(function(){
 });
 
 <%# イベント編集用モーダル内の「更新」ボタン %>
-$(document).on('click', '#update_select_modal_button_<%= @events[0].id %>', function(e){
+$(document).on('click', '#update_select_modal_button', function(e){
 /*
     e.preventDefault();
 
@@ -174,8 +174,8 @@ $(document).on('click', '#update_select_modal_button_<%= @events[0].id %>', func
                 $("#event_body").html(html);
              //保存成功が成功した(form_bodyのテンプレート)時に、保存ボタンを非表示
                if($("#render-template").val()){
-                 document.getElementById("save_select_modal_button_<%= @events[0].id %>").style.display="none";
-               document.getElementById("update_select_modal_button_<%= @events[0].id %>").style.display="none";
+                 document.getElementById("save_select_modal_button").style.display="none";
+               document.getElementById("update_select_modal_button").style.display="none";
                 }});
   }
   else{
@@ -188,8 +188,8 @@ $(document).on('click', '#update_select_modal_button_<%= @events[0].id %>', func
                 $("#event_body").html(data);
 
                if($("#render-template").val()){
-                 document.getElementById("save_select_modal_button_<%= @events[0].id %>").style.display="none";
-                 document.getElementById("update_select_modal_button_<%= @events[0].id %>").style.display="none";                 
+                 document.getElementById("save_select_modal_button").style.display="none";
+                 document.getElementById("update_select_modal_button").style.display="none";                 
 
               }
 
