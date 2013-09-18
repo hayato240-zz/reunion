@@ -71,6 +71,13 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    members = params[:member2].split(",")
+    if(members)
+        members.each{|user_id|
+          user = User.find_by(id: user_id) 
+          member = Member.create(:event_id => @event.id, :user_id => user_id, attend_status: 2) if user
+        }
+      end
     respond_to do |format|
       if @event.update(event_params)
 #        format.html { redirect_to @event, notice: 'Event was successfully updated.' }

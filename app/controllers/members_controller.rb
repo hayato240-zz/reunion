@@ -69,7 +69,7 @@ class MembersController < ApplicationController
 
   def search
 
-  	@event_users = User.select(:id, :name).where.not(id: session[:user_id]).where("name LIKE ?","%"+params[:q]+"%").join(:members)
+  	@event_users = User.select(:id, :name).where.not(id: session[:user_id]).where("name LIKE ?","%"+params[:q]+"%")
 #	render partial: 'members_body'
   	if request.xml_http_request?
   		render partial: 'members_body'
