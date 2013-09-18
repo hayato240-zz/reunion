@@ -50,7 +50,7 @@
       <%= hidden_field_tag "select_members", '', name: 'member2', value: "" %>
     <% end %>
 
-      <tr>
+      <tr id="add_member">
         <td><%= "メンバー追加"%></td>
         <td colspan="2">
           <div class="search_member">
@@ -119,7 +119,7 @@ $(document).ready(function(){
   $.ajax({
   url: "<%= search_members_path %>",
   type: "GET",
-  data: {"q": ""},
+  data: {"q": "", "event_id":<%= @event.id %>},
   success: function(data)
   {  
     $("#member-info").html(data);
@@ -135,7 +135,7 @@ $(document).on('click', '#search_member', function(xhr,data,status){
   $.ajax({
   url: "<%= search_members_path %>",
   type: "GET",
-  data: {"q": $('#q').val()},
+  data: {"q": $('#q').val(), "event_id":<%= @event.id %>},
   success: function(data)
   {  
     $("#member-info").html(data);

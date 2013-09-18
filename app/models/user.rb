@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   require 'open-uri'
   has_many :study_abroads
+  has_many :members
   attr_accessible :name, :image, :study_abroads_attributes
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/system/images/event/missing.jpg", :hash_secret => "longSecretString", :url => "/system/images/event/:hash.:extension"
   accepts_nested_attributes_for :study_abroads
