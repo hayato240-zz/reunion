@@ -59,7 +59,7 @@
               <%#= submit_tag "search" ,class: "btn search_button"%>
             <% end %>
 
-            <button id="search_member">検索</button>
+            <div id="search_member2">検索</div>
             </div><%# /serach_member %>
         </td>
 
@@ -138,7 +138,7 @@ $(document).ready(function(){
   });
 });
   
-$(document).on('click', '#search_member', function(xhr,data,status){
+$(document).on('click', '#search_member2', function(xhr,data,status){
   $.ajax({
   url: "<%= search_members_path %>",
   type: "GET",
