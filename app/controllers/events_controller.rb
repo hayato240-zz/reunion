@@ -25,12 +25,14 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @event_new = true
     render :partial => 'form_body'
   end
 
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    @event_new = false
     render partial: "form_body"
 
   end

@@ -91,7 +91,9 @@
     image_include = true;
  });
 
- event_id = <%= @event.id %>
+   event_id = <%= @event.id %>
+
+
 
 
 $(function(){
@@ -116,10 +118,15 @@ $(function(){
 
 //検索フィールド用に、カラーボックスが開いたときに検索結果を取得
 $(document).ready(function(){
+
   $.ajax({
   url: "<%= search_members_path %>",
-  type: "GET",
-  data: {"q": ""},
+  type: "GET",  
+  <% if @event_new %>
+    data: {"q": ""},
+  <% else %>
+    data: {"q": "", "event_id": event_id},
+  <% end %>
   success: function(data)
   {  
     $("#member-info").html(data);
