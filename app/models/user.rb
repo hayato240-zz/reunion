@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
     create!do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
+      save_file(user, auth["info"]["image"])
 #      user.image = auth["info"]["image"]
 
       if user.provider == "facebook"
@@ -16,6 +17,15 @@ class User < ActiveRecord::Base
       else
          user.name = auth["info"]["nickname"]
       end
+    end
+  end
+end
+
+def save_file(user, url)
+  filename = File.basename(url)
+  open(filename, 'wb') do |file|
+    open(url) do |data|
+        user.image = data
     end
   end
 end
