@@ -73,8 +73,20 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    is_success  = @event.update(event_params)
+      # パラメータmemberは、distinctionのカンマ区切りで渡される
+      members = params[:member2].split(",")
+
+
+      #グループに参加しているメンバーをDBに保存
+      if(members)
+        members.each{|user_id|
+          user = User.find_by(id: user_id) 
+          member = Member.create(:event_id => @event.id, :user_id => user_id, attend_status: 2) if user
+        }
+      end
     respond_to do |format|
-      if @event.update(event_params)
+      if is_success
 #        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.html { render :partial => 'show_form_body', success: true, notice: 'イベントの更新に成功しました'}
         format.json { head :no_content }

@@ -157,7 +157,6 @@ $(document).on('click', '#search_member', function(xhr,data,status){
 
 //検索ボタンを押してから戻ってきたデータを用いて、画面に表示
 $(document).on("ajax:success", ".form_search", function(data, status, xhr){
-    alert(status);
     $("#member-info").html(data);
   });
 

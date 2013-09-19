@@ -167,9 +167,22 @@ $(document).on('click', '#update_select_modal_button', function(e){
 /*
     e.preventDefault();
 
+
+
+
     $('#event_modal').modal('hide');
     $('#event_form').submit();
     */
+
+    var select_member_ids = "";
+    var select_members = $(".partner");
+
+    for(var i = 0; i<select_members.length;i++){
+        select_member_ids += select_members[i].attributes.name.value;
+        if(i != select_members.length - 1)
+          select_member_ids += ",";
+        }
+    $("#select_members").val(select_member_ids);
     if(image_include){
     $('#upload-image').upload('/events/'+event_id,$("#event_form").serialize(),function(html){
 
