@@ -15,7 +15,8 @@ User.create(:name => 'Sato')
 
 # StudyAbroad関係
 StudyAbroad.create(:school_name => 'CNE1', :study_from => '2011-01-01', :study_to => '2011-02-01', :user_id => 4)
-StudyAbroad.create(:school_name => 'StoryShare', :study_from => '2012-01-01', :study_to => '2012-02-01', :user_id => 1)
+StudyAbroad.create(:school_name => 'StoryShare', :study_from => '2012-01-01', :study_to => '2012-02-01', :user_id => 4)
+StudyAbroad.create(:school_name => 'ああああ', :study_from => '2010-01-01', :study_to => '2010-02-01', :user_id => 4)
 
 # Teacher関連
 Teacher.create(:name => 'Jackie', :study_abroads_id => 4)
