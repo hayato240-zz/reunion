@@ -9,6 +9,9 @@ CNE1Party::Application.routes.draw do
   put "profile/update"
   patch "profile/update"
   get "profile/destroy"
+  get "profile/add_school"
+  post "profile/create_school"
+  delete "profile/destroy_school"
   get "login/index"
 
   resources :events

@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20130912180312) do
     t.string   "teacher"
   end
 
-  add_index "study_abroads", ["user_id"], name: "index_study_abroads_on_user_id"
+  add_index "study_abroadsstudy_abroads", ["user_id"], name: "index_study_abroads_on_user_id"
 
   create_table "teachers", force: true do |t|
     t.string   "name"

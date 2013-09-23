@@ -2,6 +2,7 @@
 <center>
 <h1>プロフィール</h1>
 <%= link_to 'プロフィール編集', profile_edit_path, remote: true, id: 'update_profile_button' ,:class => 'btn btn-primary'  %>
+<%= link_to '学校情報の追加', profile_add_school_path, remote: true, id: 'add_school_info_button' ,:class => 'btn btn-primary'  %>
 	
 <div id="profile_body">
  <table class="table table-hover" align="center">
@@ -16,18 +17,20 @@
         <td><%= image_tag @user.image.url(:thumb)%></td>
       </tr>
 
- <% @user.study_abroads.each do |sh| %>
-    <td><%= "留学先"%></td>
-    <td colspan="2"><%= sh.school_name%></td>
-  </tr>
-  <tr>
-    <td><%= "留学期間"%></td>
-    <td colspan="2"><%= sh.study_from.to_s+"~"+ sh.study_to.to_s%></td>
-  </tr>
-  <tr>
-    <td><%= "先生" %></td>
-    <td colspan="2"><%= sh.teacher %></td>
-  </tr>
+  <% @user.study_abroads.each do |sh| %>
+    <tr>
+      <td><%= "留学先"%></td>
+      <td colspan="2"><%= sh.school_name%></td>
+      <td><%= link_to '削除', profile_destroy_school_path(:id => sh.id) ,:method => :delete,:class => 'btn btn-primary'  %></td>
+    </tr>
+    <tr>
+      <td><%= "留学期間"%></td>
+      <td colspan="2"><%= sh.study_from.to_s+"~"+ sh.study_to.to_s%></td>
+    </tr>
+    <tr>
+      <td><%= "先生" %></td>
+      <td colspan="2"><%= sh.teacher %></td>
+    </tr>
   <% end %>
 
     </tbody>
@@ -35,20 +38,68 @@
 </div>
 
 
-<button class="btn btn-large" id="update_profile_<%= @user.id %>">保存</button>
+<div class="modal hide fade" id="add_school_modal">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+      <div id="header-title">
+        <h3>学校情報の追加</h3>
+      </div>
+  </div>
+
+  <div class="modal-body" id="add_school_body">
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-large" id="add_school_modal_button">保存</button>
+    <button class="btn btn-large" id="close_school_modal_button">閉じる</button>
+  </div>
+</div>
+
 </center>
 
 
+
+
+
 <%= javascript_tag do %>
+
+<%# 「プロフィール編集」のモーダルを表示 %>
+$(document).on('ajax:success', '#add_school_info_button', function(xhr,data,status){
+  $("#add_school_body").html(data);
+  $("#add_school_modal").modal("show");
+});
+
+<%# 「イベント作成」モーダル内の「閉じる」ボタン %>
+$('#close_school_modal_button').click(function(){
+   window.location.reload();
+  $('#add_school_modal').modal('hide');
+});
+
 
 $(document).on('ajax:success', '#update_profile_button', function(xhr,data,status){
   $("#profile_body").html(data);
 	 	   document.getElementById("update_profile_<%= @user.id %>").style.display = "";
    	 	   document.getElementById("update_profile_button").style.display = "none";
 	});
+<%# 「プロフィール編集」モーダル内の「保存」ボタン %>
+$(document).on('click', '#add_school_modal_button', function(e){
+  
+              $.ajax({
+                type: 'POST',
+                url: '/profile/create_school',
+                dataType: 'html',
+                data: $('#school_form').serialize(),
+                success: function(data){
+                $("#add_school_body").html(data);
+       document.getElementById("add_school_modal_button").style.display = "none";
+            }});
+
+  });
 
 
-<%# 「イベント作成」モーダル内の「保存」ボタン %>
+
+
+<%# 「プロフィール編集」モーダル内の「保存」ボタン %>
 $(document).on('click', '#update_profile_<%= @user.id %>', function(e){
 	
     //アップロード、表示
@@ -57,7 +108,7 @@ $(document).on('click', '#update_profile_<%= @user.id %>', function(e){
  	   $('#upload-image').upload('/profile/update',$("#profile_form").serialize(),function(html){
 	 	   $('#profile_body').html(html);
 
-	 	   document.getElementById("update_profile_<%= @user.id %>").style.display = "none";
+	 	   document.getElementById("add_school_modal_button").style.display = "none";
    	 	   document.getElementById("update_profile_button").style.display = "";
 
               });

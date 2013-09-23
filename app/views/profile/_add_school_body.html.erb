@@ -1,0 +1,21 @@
+<%= form_for @school, :url => {action: "create_school"}, :html => {:id => "school_form", :multipart => true}, remote: true do |f| %>
+
+
+  <table class="table table-hover" align="center">
+    <tbody>
+      <tr>
+          <td>留学先</td>
+          <td colspan="2"><%= f.text_field :school_name%></td>
+      </tr>
+      <tr>
+        <td>留学期間</td>
+        <td colspan="2"> <%= f.text_field :study_from, :type=>'date', :value=>Date.today %>から<%= f.text_field :study_to, :type=>'date', :value=>Date.today %></td>
+      </tr>
+
+      <tr>
+        <td>先生</td>
+        <td colspan="2"><%= f.text_field :teacher %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

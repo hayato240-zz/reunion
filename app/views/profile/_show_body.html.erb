@@ -1,42 +1,16 @@
-<%= form_for @user, :url => {:class => 'profile' ,:action => 'edit'}, :html => {:id => "profile_form"}, remote: true do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this event from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <table class="table table-hover" align="center">
-    <tbody>
-
-      <tr>
-        <td colspan="2"><%= "名前"%></td>
-        <td colspan="2"><%= @user.name%></td>
-      </tr>
-      <tr>
-        <td colspan="2"><%= "ユーザの画像" %></td>
-        <td><%= image_tag @user.image.url(:thumb)%></td>
-      </tr>
-
- <% @user.study_abroads.each do |sh| %>
-    <td><%= "留学先"%></td>
-    <td colspan="2"><%= sh.school_name%></td>
-  </tr>
-  <tr>
-    <td><%= "留学期間"%></td>
-    <td colspan="2"><%= sh.study_from.to_s+"~"+ sh.study_to.to_s%></td>
-  </tr>
-  <tr>
-    <td><%= "先生" %></td>
-    <td colspan="2"><%= sh.teacher %></td>
-  </tr>
-  <% end %>
-
-    </tbody>
+<table class="table table-hover" align="center">
+  <tbody>
+    <tr>
+      <td><%= "留学先"%></td>
+      <td colspan="2"><%= @school.school_name%></td>
+    </tr>
+    <tr>
+      <td><%= "留学期間"%></td>
+      <td colspan="2"><%= @school.study_from.to_s+"~"+ @school.study_to.to_s%></td>
+    </tr>
+    <tr>
+      <td><%= "先生" %></td>
+      <td colspan="2"><%= @school.teacher %></td>
+    </tr>
   </table>
-<% end %> 
+</tbody>
