@@ -1,8 +1,13 @@
 <%= form_for @school, :url => {action: "create_school"}, :html => {:id => "school_form", :multipart => true}, remote: true do |f| %>
 
 
-  <table class="table table-hover" align="center">
+  <table class="table table-hover" id="school_column_1" align="center">
     <tbody>
+      <tr>
+
+        <td colspan="3"><center>学校情報</center></td>
+
+      </tr>
       <tr>
           <td>留学先</td>
           <td colspan="2"><%= f.text_field :school_name%></td>
@@ -16,6 +21,25 @@
         <td>先生</td>
         <td colspan="2"><%= f.text_field :teacher %></td>
       </tr>
+
     </tbody>
   </table>
+
+<input type="button" value="学校情報の追加" id="btn_add">
 <% end %>
+
+<script type="text/javascript">
+var tbl_cnt = 1; //グローバル変数
+jQuery(document).ready(function($) {
+
+  //追加ボタンをクリックした時の処理
+  $('#btn_add').click(function() {
+    var original = $('#school_column_' + tbl_cnt);
+    tbl_cnt++;
+    //クローンを作成し、元の後ろに設置。
+    $(original).clone().insertAfter(original)
+    .attr('id', 'school_column_' + tbl_cnt)
+  });
+});
+
+</script>

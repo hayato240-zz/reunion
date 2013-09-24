@@ -57,7 +57,6 @@ skip_before_filter :verify_authenticity_token
   def destroy_school
 
     @school = StudyAbroad.find(params[:id])
-    p "aaaaaaaaaaaaaa", @school
     respond_to do |format|
       if @school.destroy
         format.html { redirect_to '/profile/index', success: true, notice: '学校情報削除しました' }
