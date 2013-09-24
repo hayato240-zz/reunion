@@ -8,7 +8,7 @@ set :branch, "master"
 set :ssh_options, { :forward_agent => true, :port => "10022" }
 set :stage, :production
 set :user, "nishimaru_hayato"
-set :use_sudo, true 
+set :use_sudo, true
 set :runner, "deploy"
 set :deploy_to, "/data/#{application}"
 set :app_server, :puma

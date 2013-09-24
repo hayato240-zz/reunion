@@ -24,6 +24,18 @@ gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
+group :deployment do
+  # Capistraono (Deploy支援)
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'capistrano_colors'
+  gem 'rvm-capistrano'
+end
+
+# メンテナンスモード画面の表示
+gem 'turnout'
+
+
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -41,6 +53,18 @@ end
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
+
+group :deployment do
+  # Capistraono (Deploy支援)
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'capistrano_colors'
+  gem 'rvm-capistrano'
+end
+
+# メンテナンスモード画面の表示
+gem 'turnout'
+
 
 # Use debugger
  gem 'debugger', group: [:development, :test]
@@ -65,6 +89,8 @@ gem "paperclip", "~> 3.0"
 
 #attr_accessible
 gem 'protected_attributes'
+
+gem 'puma'
 
 
 gem 'event-calendar', :require => 'event_calendar'
