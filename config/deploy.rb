@@ -20,7 +20,7 @@ set :puma_ctl, "pumactl"
 set :puma_config, "#{current_path}/config/puma.rb" 
 set :puma_state, "#{current_path}/tmp/pids/puma.state"
 set :puma_pid, "#{current_path}/shared/tmp/pids/server.pid"
-set :rake, "/Users/nishimaru_hayato/.rbenv/shims/rake"
+set :rake, "/usr/local/rbenv/shims/rake"
 
 working_directory = Dir.pwd
 
