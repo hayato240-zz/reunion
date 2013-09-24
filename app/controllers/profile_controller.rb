@@ -41,17 +41,17 @@ skip_before_filter :verify_authenticity_token
   end
 
   def create_school
-    @school = StudyAbroad.new(school_params)
-    @school.user_id = current_user.id
-    is_success = @school.save
-
+    @schools = params["study_abroad"]
+    p "aaaaaaaaaaa",params["study_abroad"]
+    @schools.each{|school|
+      school = StudyAbroad.new(school)
+      school.user_id = current_user.id
+      school.save
+    }
     respond_to do |format|
-      if is_success
         format.html { render :partial => 'show_body', success: true, notice: '学校情報更新しました' }
-      else
-        format.html { render :partial => 'add_school_body',success: false, notice: '学校情報更新に失敗しました' }
-      end
     end
+
   end
 
   def destroy_school

@@ -1,7 +1,7 @@
 <%= form_for @school, :url => {action: "create_school"}, :html => {:id => "school_form", :multipart => true}, remote: true do |f| %>
 
 
-  <table class="table table-hover" id="school_column_1" align="center">
+  <table class="table table-hover" id="school_column_0" align="center">
     <tbody>
       <tr>
 
@@ -10,16 +10,16 @@
       </tr>
       <tr>
           <td>留学先</td>
-          <td colspan="2"><%= f.text_field :school_name%></td>
+          <td colspan="2"><%= f.text_field :school_name, :name => "study_abroad[][school_name]" %></td>
       </tr>
       <tr>
         <td>留学期間</td>
-        <td colspan="2"> <%= f.text_field :study_from, :type=>'date', :value=>Date.today %>から<%= f.text_field :study_to, :type=>'date', :value=>Date.today %></td>
+        <td colspan="2"> <%= f.text_field :study_from, :name=>"study_abroad[][study_from]",:type=>'date', :value=>Date.today %>から<%= f.text_field :study_to, :name=>"study_abroad[][study_to]",:type=>'date', :value=>Date.today %></td>
       </tr>
 
       <tr>
         <td>先生</td>
-        <td colspan="2"><%= f.text_field :teacher %></td>
+        <td colspan="2"><%= f.text_field :teacher, :name=>"study_abroad[][teacher]" %></td>
       </tr>
 
     </tbody>
@@ -29,7 +29,7 @@
 <% end %>
 
 <script type="text/javascript">
-var tbl_cnt = 1; //グローバル変数
+var tbl_cnt = 0; //グローバル変数
 jQuery(document).ready(function($) {
 
   //追加ボタンをクリックした時の処理
@@ -38,7 +38,15 @@ jQuery(document).ready(function($) {
     tbl_cnt++;
     //クローンを作成し、元の後ろに設置。
     $(original).clone().insertAfter(original)
-    .attr('id', 'school_column_' + tbl_cnt)
+    .attr('id', 'school_column_' + tbl_cnt).val("")
+
+      //input要素のid, name属性を変更。value値を空白に。
+      .find('input').each(function(idx, obj) {
+        $(obj).attr({
+
+        }).val('');
+      });
+
   });
 });
 
