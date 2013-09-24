@@ -1,16 +1,18 @@
 <table class="table table-hover" align="center">
   <tbody>
+   <% @schools.each do |school| %>
     <tr>
       <td><%= "留学先"%></td>
-      <td colspan="2"><%= @school.school_name%></td>
+      <td colspan="2"><%= school["school_name"]%></td>
     </tr>
     <tr>
       <td><%= "留学期間"%></td>
-      <td colspan="2"><%= @school.study_from.to_s+"~"+ @school.study_to.to_s%></td>
+      <td colspan="2"><%= school["study_from"].to_s+"~"+ school["study_to"].to_s%></td>
     </tr>
     <tr>
       <td><%= "先生" %></td>
-      <td colspan="2"><%= @school.teacher %></td>
+      <td colspan="2"><%= school["teacher"] %></td>
     </tr>
+    <% end %>
   </table>
 </tbody>
