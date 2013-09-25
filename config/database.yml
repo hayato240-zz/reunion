@@ -30,8 +30,8 @@ production:
 #  collation: utf8mb4_general_ci
   reconnect: false
   database: reunion_production
-  pool: 5
+  pool: 5  
+  username: root
   password: 0nly0ne
-  password: root
 #  host: localhost
   socket: /var/run/mysqld/mysqld.sock
