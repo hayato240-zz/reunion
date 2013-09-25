@@ -65,6 +65,8 @@ end
 # メンテナンスモード画面の表示
 gem 'turnout'
 
+# mysql
+gem 'mysql2'
 
 # Use debugger
  gem 'debugger', group: [:development, :test]
