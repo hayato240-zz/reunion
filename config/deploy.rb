@@ -53,12 +53,11 @@ namespace :puma do
   end
   after "deploy:stop", "puma:stop"
 
-  desc "Restart Puma"
+desc "Restart Puma"
   task :restart, roles: :app, :expect => { no_release: true } do
-    run "cd #{current_path} && pumactl -S #{puma_state} restart || echo 'skip'"
-    # stop
-    # start
-    #    run "sudo /usr/local/rbenv/shims/puma restart #{application}"
+    run "cd #{current_path} && kill -9 `cat #{puma_pid}` || echo 'skip' "
+    run "rm /tmp/puma.sock || echo 'skip'"
+    run "cd #{current_path} && RAILS_ENV=production #{puma_binary} -C #{puma_config} -e #{rails_env} -d || echo 'skip'"
   end
   after "deploy:restart", "puma:restart"
 
