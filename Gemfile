@@ -66,7 +66,7 @@ end
 gem 'turnout'
 
 # mysql
-gem 'mysql2'
+gem 'mysql2', '>= 0.3.12.b4'
 
 # Use debugger
  gem 'debugger', group: [:development, :test]
