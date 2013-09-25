@@ -34,4 +34,4 @@ production:
   username: root
   password: 0nly0ne
 #  host: localhost
-  socket: /var/run/mysqld/mysqld.sock
+  socket: /var/lib/mysql/mysql.sock
