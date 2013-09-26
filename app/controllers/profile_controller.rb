@@ -25,7 +25,7 @@ skip_before_filter :verify_authenticity_token
 
     respond_to do |format|
       if is_success
-        format.html { render :partial => 'show_body', success: true, notice: 'イベントを作成しました' }
+        format.html { render :partial => 'show_user_body', success: true, notice: 'イベントを作成しました' }
       else
         format.html { render :partial => 'edit_body',success: false, notice: 'イベントに失敗しました' }
       end
