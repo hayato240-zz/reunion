@@ -36,7 +36,7 @@
     </tbody>
   </table>
 </div>
-<button class="btn btn-large" id="update_profile_<%= @user.id %>">保存</button>
+
 
 <div class="modal hide fade" id="add_school_modal">
   <div class="modal-header">
@@ -54,7 +54,7 @@
     <button class="btn btn-large" id="close_school_modal_button">閉じる</button>
   </div>
 </div>
-
+<button class="btn btn-large" id="update_profile">保存</button>
 </center>
 
 
@@ -78,7 +78,7 @@ $('#close_school_modal_button').click(function(){
 
 $(document).on('ajax:success', '#update_profile_button', function(xhr,data,status){
   $("#profile_body").html(data);
-	 	   document.getElementById("update_profile_<%= @user.id %>").style.display = "";
+	 	   document.getElementById("update_profile").style.display = "";
    	 	   document.getElementById("update_profile_button").style.display = "none";
 	});
 <%# 「プロフィール編集」モーダル内の「保存」ボタン %>
@@ -100,7 +100,7 @@ $(document).on('click', '#add_school_modal_button', function(e){
 
 
 <%# 「プロフィール編集」モーダル内の「保存」ボタン %>
-$(document).on('click', '#update_profile_<%= @user.id %>', function(e){
+$(document).on('click', '#update_profile', function(e){
 	
     //アップロード、表示
 
@@ -124,7 +124,7 @@ $(document).on('click', '#update_profile_<%= @user.id %>', function(e){
                 data: $('#profile_form').serialize(),
                 success: function(data){
                 $("#profile_body").html(data);
-	 	   document.getElementById("update_profile_<%= @user.id %>").style.display = "none";
+	 	   document.getElementById("update_profile").style.display = "none";
    	 	   document.getElementById("update_profile_button").style.display = "";
             }});
 }
