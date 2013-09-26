@@ -63,6 +63,14 @@
 
 <%= javascript_tag do %>
 
+<%# プロフィールページ開いた時は、保存ボタンは非表示%>
+$(document).ready(function($){
+         document.getElementById("update_profile").style.display = "none";
+  
+
+})
+
+
 <%# 「プロフィール編集」のモーダルを表示 %>
 $(document).on('ajax:success', '#add_school_info_button', function(xhr,data,status){
   $("#add_school_body").html(data);
@@ -109,7 +117,7 @@ $(document).on('click', '#update_profile', function(e){
 	 	   $('#profile_body').html(html);
 
 	 	   document.getElementById("add_school_modal_button").style.display = "none";
-   	 	   document.getElementById("update_profile_button").style.display = "";
+   	 	   document.getElementById("update_profile").style.display = "";
 
               });
 
